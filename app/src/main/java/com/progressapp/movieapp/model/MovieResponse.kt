@@ -1,4 +1,4 @@
-package com.progressapp.movieapp
+package com.progressapp.movieapp.model
 
 import com.google.gson.annotations.SerializedName
 
