@@ -73,8 +73,9 @@ class MainActivity : ComponentActivity() {
     fun showOnLog(movies : MovieResponse) {
         Log.i("Tittle ", movies.originalTitle)
         Log.i("Description ", movies.movieDescription)
-        Log.i("Date ", movies.relaseDate)
+        Log.i("Date ", if (movies.relaseDate.isNullOrBlank()) "Non released yet" else movies.relaseDate)
         Log.i("Movie ID ", movies.MovieId.toString())
+        Log.i("Adult Type: ", movies.adultType.toString())
 
     }
 }
