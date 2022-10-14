@@ -8,6 +8,7 @@ data class MovieResponse (
     @SerializedName ("release_date") var relaseDate : String,
     @SerializedName ("id") var MovieId: Long,
     @SerializedName ("original_title")var originalTitle : String,
-    @SerializedName ("overview") var movieDescription : String
+    @SerializedName ("overview") var movieDescription : String,
+    @SerializedName ("poster_path") var movieImage : String
 
     )

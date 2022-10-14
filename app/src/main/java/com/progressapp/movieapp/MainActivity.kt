@@ -54,9 +54,9 @@ class MainActivity : ComponentActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(ApiService::class.java)
                 .getPopularMovies("movie/latest?$API_KEY")
-            val movies = call.body() as MovieResponse?
+            val movies = call.body() as MovieResponse
 
-            if  (movies != null) {
+            if  (call.isSuccessful) {
                 showOnLog(movies)
             }
             else{
@@ -76,6 +76,7 @@ class MainActivity : ComponentActivity() {
         Log.i("Date ", if (movies.relaseDate.isNullOrBlank()) "Non released yet" else movies.relaseDate)
         Log.i("Movie ID ", movies.MovieId.toString())
         Log.i("Adult Type: ", movies.adultType.toString())
+        Log.i("Image path:", if (movies.movieImage.isNullOrBlank()) "No image found" else movies.movieImage)
 
     }
 }
