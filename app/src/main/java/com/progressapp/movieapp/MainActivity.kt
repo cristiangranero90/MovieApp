@@ -35,50 +35,13 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Greeting("Android")
-                    getLatestMovie()
+
                 }
             }
         }
     }
-    
-
-    private fun getRetrofit() : Retrofit{
-        return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
-    private fun getLatestMovie() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(RestDataSource::class.java)
-                .getPopularMovies()
-            val movies = call.body() as MovieResponse
-
-            if  (call.isSuccessful) {
-                showOnLog(movies)
-            }
-            else{
-                showErrorLog()
-            }
-        }
-    }
-
-    fun showErrorLog() {
-        Toast.makeText(this, "unexpected error", Toast.LENGTH_SHORT)
-    }
-
-
-    fun showOnLog(movies : MovieResponse) {
-        Log.i("Tittle ", movies.originalTitle)
-        Log.i("Description ", movies.movieDescription)
-        Log.i("Date ", if (movies.relaseDate.isNullOrBlank()) "Non released yet" else movies.relaseDate)
-        Log.i("Movie ID ", movies.MovieId.toString())
-        Log.i("Adult Type: ", movies.adultType.toString())
-        Log.i("Image path:", if (movies.movieImage.isNullOrBlank()) "No image found" else movies.movieImage)
-
-    }
 }
+
 
 @Composable
 fun Greeting(name: String) {
