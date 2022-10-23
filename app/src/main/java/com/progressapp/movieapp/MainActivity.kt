@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.progressapp.movieapp.model.MovieResponse
-import com.progressapp.movieapp.data.repository.ApiRepository
+import com.progressapp.movieapp.data.repository.RestDataSource
 import com.progressapp.movieapp.ui.theme.MovieAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
 
     private fun getLatestMovie() {
         CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(ApiRepository::class.java)
+            val call = getRetrofit().create(RestDataSource::class.java)
                 .getPopularMovies("movie/latest?$API_KEY")
             val movies = call.body() as MovieResponse
 
