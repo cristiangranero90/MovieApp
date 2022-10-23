@@ -1,6 +1,6 @@
 package com.progressapp.movieapp.di
 
-import com.progressapp.movieapp.data.repository.RestDataSource
+import com.progressapp.movieapp.data.RestDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

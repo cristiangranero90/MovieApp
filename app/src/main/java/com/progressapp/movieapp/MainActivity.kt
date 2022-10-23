@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.progressapp.movieapp.model.MovieResponse
-import com.progressapp.movieapp.data.repository.RestDataSource
+import com.progressapp.movieapp.data.RestDataSource
 import com.progressapp.movieapp.ui.theme.MovieAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -24,8 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    val API_KEY : String = "api_key=cb86974c362f47d464bb3b6c94b8f7c2&language=en-US&page=1"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +52,7 @@ class MainActivity : ComponentActivity() {
     private fun getLatestMovie() {
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(RestDataSource::class.java)
-                .getPopularMovies("movie/latest?$API_KEY")
+                .getPopularMovies()
             val movies = call.body() as MovieResponse
 
             if  (call.isSuccessful) {

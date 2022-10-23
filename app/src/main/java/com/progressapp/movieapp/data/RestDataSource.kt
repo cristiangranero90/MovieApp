@@ -1,4 +1,4 @@
-package com.progressapp.movieapp.data.repository
+package com.progressapp.movieapp.data
 
 import com.progressapp.movieapp.model.MovieResponse
 import retrofit2.Response
@@ -7,7 +7,7 @@ import retrofit2.http.Url
 
 interface RestDataSource {
 
-    @GET
-    suspend fun getPopularMovies(@Url url : String) : Response<MovieResponse>
+    @GET("movie/latest?")
+    suspend fun getPopularMovies() : Response<MovieResponse>
 
 }
