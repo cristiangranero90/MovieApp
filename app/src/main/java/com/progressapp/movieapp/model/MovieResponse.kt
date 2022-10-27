@@ -2,6 +2,10 @@ package com.progressapp.movieapp.model
 
 import com.google.gson.annotations.SerializedName
 
+data class MovieList(
+    @SerializedName ("results") var movieList: List<MovieResponse> = emptyList()
+)
+
 data class MovieResponse (
 
     @SerializedName ("adult") var adultType : Boolean,
