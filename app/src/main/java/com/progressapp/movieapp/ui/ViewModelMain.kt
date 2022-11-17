@@ -1,15 +1,14 @@
 package com.progressapp.movieapp.ui
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.progressapp.movieapp.model.MovieList
-import com.progressapp.movieapp.model.MovieResponse
 import com.progressapp.movieapp.repositories.MovieRepositoryImp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,23 +16,32 @@ class ViewModelMain @Inject constructor(
     private val movieRepo : MovieRepositoryImp
 ) : ViewModel() {
 
-    var response: MovieList? = null
+    var results: MovieList? = null
+    private val _isLoading : MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>(false)
+    }
+    val isLoading : LiveData<Boolean> get() = _isLoading
 
-    private fun getPopular()  {
+    fun getPopular()  {
          viewModelScope.launch(Dispatchers.IO) {
-            response = movieRepo.getPopularMovies()
+             _isLoading.postValue(true)
+             results = movieRepo.getPopularMovies()
+             _isLoading.postValue(false)
         }
     }
 
-    public fun clickPopular() {
+    fun clickPopular() {
 
-        getPopular()
-
-        if (response != null){
-            val ite = response!!.movieList.iterator()
+        if (results != null){
+            val ite = results!!.movieList.iterator()
             while (ite.hasNext()){
                 println(ite.next().originalTitle)
             }
         }
+        else{
+            getPopular()
+        }
     }
+
+
 }
