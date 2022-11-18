@@ -19,15 +19,15 @@ class MovieRepositoryImp @Inject constructor(
         return null
     }
 
-    override suspend fun getPopularMovies(): MovieList? {
+    override suspend fun getPopularMovies(): MovieList {
 
         val response : Response<MovieList> = dataSource.getPopularMovies()
 
         if (response.isSuccessful){
-            return response.body()
+            return response.body()!!
         }
         else{
-            return null
+            throw RuntimeException("Movie list empty, an error occured")
         }
     }
 

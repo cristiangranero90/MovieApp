@@ -17,14 +17,13 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun BottomBar(
     onHomeClicked: () -> Unit,
-    onMovieclicked: () -> Unit,
+    onMovieClicked: () -> Unit,
     onFavoritesClicked: () -> Unit,
     onSearchClicked: () -> Unit,
     modifier: Modifier = Modifier
 ){
     Row (
-        modifier = Modifier.fillMaxWidth()
-            .background(color = Color.White),
+        modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ){
@@ -33,7 +32,7 @@ fun BottomBar(
             Icon(imageVector = Icons.Default.Home, contentDescription = "Home Screen")
         }
 
-        IconButton(onClick = onMovieclicked) {
+        IconButton(onClick = onMovieClicked) {
             Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "Movies")
         }
 
