@@ -19,7 +19,11 @@ import androidx.compose.ui.unit.dp
 import com.progressapp.movieapp.R
 
 @Composable
-fun TopBar(){
+fun TopBar(
+    onListClicked: () -> Unit,
+    onAccountClicked: () -> Unit,
+    modifier: Modifier = Modifier
+){
 
     Row(
         modifier = Modifier.fillMaxWidth()
@@ -29,12 +33,13 @@ fun TopBar(){
 
 
     ) {
-        IconButton(onClick = { /*TODO*/ }) {
+
+        IconButton(onClick = onListClicked) {
             Icon(imageVector = Icons.Default.List, contentDescription = "List")
         }
 
         Box(
-            modifier = Modifier.padding(start = 2.dp, end = 8.dp, top = 16.dp, bottom = 16.dp)
+            modifier = Modifier.padding(start = 2.dp, end = 8.dp, top = 20.dp, bottom = 20.dp)
                 .width(300.dp)
         ) {
             Image(
@@ -45,10 +50,8 @@ fun TopBar(){
                 )
         }
 
-        Box(modifier = Modifier.fillMaxWidth()) {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "Account")
-            }
+        IconButton(onClick = onAccountClicked) {
+            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "Account")
         }
     }
 }
@@ -56,5 +59,5 @@ fun TopBar(){
 @Preview(showBackground = true)
 @Composable
 fun TopBarPreview(){
-    TopBar()
+    TopBar({},{})
 }
