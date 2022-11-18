@@ -22,7 +22,8 @@ import com.progressapp.movieapp.ui.ViewModelMain
 @Composable
 fun MainScreen(
     viewModelMain: ViewModelMain = hiltViewModel(),
-    BASE_IMAGE_URL: String = "https://image.tmdb.org/t/p/w500"
+    BASE_IMAGE_URL: String = "https://image.tmdb.org/t/p/w500",
+    modifier: Modifier = Modifier
 ){
 
     //viewModelMain.getPopular()

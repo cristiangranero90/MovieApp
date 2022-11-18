@@ -52,9 +52,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Navigation(){
+fun Navigation() {
+
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "splash_screen"){
+
+    NavHost(navController = navController, startDestination = "splash_screen") {
 
         composable("splash_screen") {
             SplashScreen(navController = navController)
@@ -73,6 +75,7 @@ fun SplashScreen(navController: NavController){
         androidx.compose.animation.core.Animatable(0f)
     }
 
+    //Image scale animation
     LaunchedEffect(key1 = true ) {
         scale.animateTo(
             targetValue = 0.3f,
