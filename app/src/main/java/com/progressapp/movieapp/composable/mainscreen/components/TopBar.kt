@@ -5,13 +5,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,15 +26,15 @@ fun TopBar(
 ){
 
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = MaterialTheme.colors.background),
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically,
-
-
     ) {
 
         IconButton(onClick = onListClicked) {
-            Icon(imageVector = Icons.Default.List, contentDescription = "List")
+            Icon(imageVector = Icons.Default.List, contentDescription = "Side menu")
         }
 
         Box(
@@ -44,13 +44,13 @@ fun TopBar(
             Image(
                 painterResource(id = R.drawable.blue_long_small),
                 modifier = Modifier.fillMaxWidth(),
-                contentDescription = "Image",
+                contentDescription = "Movie image",
                 contentScale = ContentScale.Crop
                 )
         }
 
         IconButton(onClick = onAccountClicked) {
-            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "Account")
+            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "Account settings")
         }
     }
 }

@@ -1,6 +1,9 @@
 package com.progressapp.movieapp.composable.mainscreen
 
+import android.widget.Space
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -44,6 +47,7 @@ fun MainScreen(
         topBar = {
             TopBar(onListClicked = { /*TODO*/ }, onAccountClicked = { /*TODO*/ })
         },
+
         bottomBar = {
             BottomBar(
                 onHomeClicked = { /*TODO*/ },
@@ -58,6 +62,7 @@ fun MainScreen(
                 .fillMaxSize()
 
         ){
+
             if(viewModelMain.isLoading.value == true || moviesList.isEmpty()){
                 item { CircularProgressIndicator(
                     modifier = Modifier.size(60.dp),
