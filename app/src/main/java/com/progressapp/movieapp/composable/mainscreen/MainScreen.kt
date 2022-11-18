@@ -1,6 +1,5 @@
 package com.progressapp.movieapp.composable.mainscreen
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -18,21 +17,21 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.progressapp.movieapp.composable.mainscreen.components.BottomBar
 import com.progressapp.movieapp.composable.mainscreen.components.MovieItemView
 import com.progressapp.movieapp.composable.mainscreen.components.TopBar
-import com.progressapp.movieapp.model.MovieResponse
 import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
 fun MainScreen(
-    viewModelMain: ViewModelMain = hiltViewModel()
+    viewModelMain: ViewModelMain = hiltViewModel(),
+    BASE_IMAGE_URL: String = "https://image.tmdb.org/t/p/w500"
 ){
 
     //viewModelMain.getPopular()
-    val BASE_IMAGE_URL: String = "https://image.tmdb.org/t/p/w500"
+
     val moviesList = viewModelMain.getMovieResults()
     val moviesListString = mutableListOf<String>()
     val scaffoldState = rememberScaffoldState()
 
-    //HarcodedMovieList for some tests
+    //Hardcoded MovieList for some tests
     for (i in 0..20){
         moviesListString.add(i, "https://via.placeholder.com/500")
     }
