@@ -38,7 +38,7 @@ fun TopBar(
         }
 
         Box(
-            modifier = Modifier.padding(start = 2.dp, end = 8.dp, top = 5.dp, bottom = 2.dp)
+            modifier = Modifier.padding(start = 2.dp, end = 2.dp, top = 4.dp, bottom = 2.dp)
                 .width(300.dp)
         ) {
             Image(

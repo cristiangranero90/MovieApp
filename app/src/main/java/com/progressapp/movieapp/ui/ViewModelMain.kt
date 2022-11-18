@@ -19,10 +19,8 @@ class ViewModelMain @Inject constructor(
     private val movieRepo : MovieRepositoryImp
 ) : ViewModel() {
 
-    var results = mutableListOf<MovieResponse>()
+    val results = mutableListOf<MovieResponse>()
     val isLoading : LiveData<Boolean> get() = _isLoading
-
-
 
     private val _isLoading : MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>(false)
@@ -32,7 +30,7 @@ class ViewModelMain @Inject constructor(
     fun getPopular()  {
          viewModelScope.launch(Dispatchers.IO) {
              _isLoading.postValue(true)
-             results.addAll(0, movieRepo.getPopularMovies()!!.movieList)
+             results.addAll(movieRepo.getPopularMovies()!!.movieList)
              _isLoading.postValue(false)
         }
     }
