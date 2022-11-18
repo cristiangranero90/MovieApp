@@ -1,4 +1,4 @@
-package com.progressapp.movieapp.composable.components
+package com.progressapp.movieapp.composable.mainscreen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,7 +27,7 @@ fun TopBar(
 
     Row(
         modifier = Modifier.fillMaxWidth()
-            .background(color = Color.LightGray),
+            .background(color = Color.White),
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically,
 
