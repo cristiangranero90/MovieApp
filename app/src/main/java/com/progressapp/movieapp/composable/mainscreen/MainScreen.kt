@@ -1,22 +1,17 @@
 package com.progressapp.movieapp.composable.mainscreen
 
-import android.widget.Space
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.progressapp.movieapp.composable.ProgressIndicator
 import com.progressapp.movieapp.composable.mainscreen.components.BottomBar
 import com.progressapp.movieapp.composable.mainscreen.components.MovieItemView
 import com.progressapp.movieapp.composable.mainscreen.components.TopBar
@@ -24,13 +19,14 @@ import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
 fun MainScreen(
+    imageClicked: () -> Unit,
+    backClicked: () -> Unit,
+    accountClicked: () -> Unit,
     viewModelMain: ViewModelMain = hiltViewModel(),
     BASE_IMAGE_URL: String = "https://image.tmdb.org/t/p/w500",
     modifier: Modifier = Modifier
 ){
-
-    //viewModelMain.getPopular()
-
+    val isLoading = viewModelMain.isLoading.value
     val moviesList = viewModelMain.getMovieResults()
     val moviesListString = mutableListOf<String>()
     val scaffoldState = rememberScaffoldState()
@@ -45,7 +41,7 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize(),
 
         topBar = {
-            TopBar(onListClicked = { /*TODO*/ }, onAccountClicked = { /*TODO*/ })
+            TopBar(onListClicked = { /*TODO*/ }, onAccountClicked = accountClicked)
         },
 
         bottomBar = {
@@ -56,31 +52,26 @@ fun MainScreen(
                 onSearchClicked = { /*TODO*/ })
         }
     ) {
+
+        ProgressIndicator(showIndicator = isLoading)
+
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
             modifier = Modifier
                 .fillMaxSize()
 
         ){
-
-            if(viewModelMain.isLoading.value == true || moviesList.isEmpty()){
-                item { CircularProgressIndicator(
-                    modifier = Modifier.size(60.dp),
-                    color = Color.Cyan)
-                }
-            }
-            else{
-                items(moviesList){
-                    MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
-                        imageClicked = { /*TODO*/ })
-                }
+            items(moviesList){
+                MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
+                    imageClicked = { })
             }
         }
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview(){
-    MainScreen()
+    MainScreen({},{}, {})
 }

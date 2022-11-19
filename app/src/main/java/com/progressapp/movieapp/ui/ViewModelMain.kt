@@ -1,7 +1,6 @@
 package com.progressapp.movieapp.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.progressapp.movieapp.model.MovieResponse
@@ -16,20 +15,15 @@ class ViewModelMain @Inject constructor(
     private val movieRepo : MovieRepositoryImp
 ) : ViewModel() {
 
+    val isLoading = mutableStateOf(false)
     private val results = mutableListOf<MovieResponse>()
-    val isLoading : LiveData<Boolean> get() = _isLoading
-
-    private val _isLoading : MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>(false)
-    }
-
 
     private fun getPopular()  {
-         viewModelScope.launch(Dispatchers.IO) {
-             _isLoading.postValue(true)
-             results.addAll(movieRepo.getPopularMovies().movieList)
-             _isLoading.postValue(false)
+        isLoading.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            results.addAll(movieRepo.getPopularMovies().movieList)
         }
+        isLoading.value = false
     }
 
     fun getMovieResults(): MutableList<MovieResponse> {
@@ -37,6 +31,4 @@ class ViewModelMain @Inject constructor(
         Thread.sleep(800)
         return results
     }
-
-
 }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +25,10 @@ fun MovieScreen(
     imageUrl: String = "https://image.tmdb.org/t/p/w500",
     modifier: Modifier = Modifier
 ){
+    val scaffoldState = rememberScaffoldState()
+
     Scaffold(
+        scaffoldState = scaffoldState,
         modifier = Modifier,
         topBar = {
             TopBarMovie(
@@ -57,12 +61,7 @@ fun MovieScreen(
             Text(text = movieResponse.movieDescription, fontSize = 18.sp)
 
         }
-        
     }
-    
-    
-
-
 }
 
 @Preview(showBackground = true)
