@@ -1,6 +1,9 @@
 package com.progressapp.movieapp.ui
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.progressapp.movieapp.model.MovieResponse
@@ -16,19 +19,20 @@ class ViewModelMain @Inject constructor(
 ) : ViewModel() {
 
     val isLoading = mutableStateOf(false)
-    private val results = mutableListOf<MovieResponse>()
+    private val _results = mutableStateListOf<MovieResponse>()
+    private val results = _results
 
     private fun getPopular()  {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            results.addAll(movieRepo.getPopularMovies().movieList)
+            _results.addAll(movieRepo.getPopularMovies().movieList)
         }
         isLoading.value = false
     }
 
     fun getMovieResults(): MutableList<MovieResponse> {
         getPopular()
-        Thread.sleep(800)
         return results
     }
 }
+
