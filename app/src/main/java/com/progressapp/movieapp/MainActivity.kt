@@ -8,11 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.progressapp.movieapp.composable.mainscreen.MainScreen
-import com.progressapp.movieapp.composable.splashscreen.SplashScreen
+import com.progressapp.movieapp.composable.Navigation
 import com.progressapp.movieapp.ui.theme.MovieAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,23 +32,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Navigation(
 
-) {
-    val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = "splash_screen") {
-
-        composable("splash_screen") {
-            SplashScreen(navController = navController)
-        }
-
-        composable("home_screen") {
-            MainScreen({},{},{})
-        }
-    }
-}
 
 @Composable
 fun Greeting(
