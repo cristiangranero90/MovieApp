@@ -16,7 +16,9 @@ class MovieRepositoryImp @Inject constructor(
         if (response.isSuccessful)
             return response.body()
 
-        return null
+        else{
+            throw RuntimeException("No movies found")
+        }
     }
 
     override suspend fun getPopularMovies(): MovieList {

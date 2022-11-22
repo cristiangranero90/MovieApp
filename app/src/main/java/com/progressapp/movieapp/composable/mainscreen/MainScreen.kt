@@ -17,6 +17,7 @@ import com.progressapp.movieapp.composable.ProgressIndicator
 import com.progressapp.movieapp.composable.mainscreen.components.BottomBar
 import com.progressapp.movieapp.composable.mainscreen.components.MovieItemView
 import com.progressapp.movieapp.composable.mainscreen.components.TopBar
+import com.progressapp.movieapp.composable.moviescreen.components.TopBarMovie
 import com.progressapp.movieapp.model.MovieResponse
 import com.progressapp.movieapp.ui.ViewModelMain
 
@@ -29,21 +30,26 @@ fun MainScreen(
     BASE_IMAGE_URL: String = "https://image.tmdb.org/t/p/w500",
     modifier: Modifier = Modifier
 ){
-    val isLoading = remember {
-        viewModelMain.isLoading
-    }
-    val moviesList = remember {
-       viewModelMain.getMovieResults()
-    }
+    val isLoading = remember { viewModelMain.isLoading }
+    val moviesList = remember { viewModelMain.getMovieResults() }
     val scaffoldState = rememberScaffoldState()
-
 
     Scaffold(
         scaffoldState = scaffoldState,
         modifier = Modifier.fillMaxSize(),
 
         topBar = {
-            TopBar(onListClicked = { /*TODO*/ }, onAccountClicked = accountClicked)
+            if(true){
+                TopBar(
+                    onListClicked = { /*TODO*/ },
+                    onAccountClicked = accountClicked )
+            }
+            else{
+                TopBarMovie(
+                    movieTitle = "Some title",
+                    onBackClcked = { /*TODO*/ },
+                    onProfileClicked = { /*TODO*/ } )
+            }
         },
 
         bottomBar = {
