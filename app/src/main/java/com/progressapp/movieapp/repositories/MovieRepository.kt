@@ -8,6 +8,6 @@ interface MovieRepository {
 
     suspend fun getLatestMovie() : MovieResponse?
 
-    suspend fun getPopularMovies() : MovieList?
+    suspend fun getPopularMovies(page: String) : MovieList?
 
 }
