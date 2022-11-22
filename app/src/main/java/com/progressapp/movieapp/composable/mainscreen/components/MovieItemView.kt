@@ -24,9 +24,7 @@ fun MovieItemView(
         AsyncImage(
             model = imageUrl,
             contentDescription = "Movie image",
-            modifier = Modifier.clickable {
-                imageClicked
-            }
+            modifier = Modifier.clickable(onClick = imageClicked)
                 .fillMaxSize()
         )
     }

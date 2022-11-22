@@ -8,31 +8,27 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.progressapp.movieapp.composable.ProgressIndicator
 import com.progressapp.movieapp.composable.mainscreen.components.BottomBar
 import com.progressapp.movieapp.composable.mainscreen.components.MovieItemView
 import com.progressapp.movieapp.composable.mainscreen.components.TopBar
 import com.progressapp.movieapp.composable.moviescreen.components.TopBarMovie
-import com.progressapp.movieapp.model.MovieResponse
 import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
 fun MainScreen(
-    imageClicked: () -> Unit,
-    backClicked: () -> Unit,
-    accountClicked: () -> Unit,
-    viewModelMain: ViewModelMain = hiltViewModel(),
+    navController: NavController,
+    viewModelMain: ViewModelMain,
     BASE_IMAGE_URL: String = "https://image.tmdb.org/t/p/w500",
     modifier: Modifier = Modifier
 ){
     val isLoading = remember { viewModelMain.isLoading }
     val moviesList = remember { viewModelMain.getMovieResults() }
+    val enableBar = remember { viewModelMain.barEnabled }
     val scaffoldState = rememberScaffoldState()
     val gridState = rememberLazyGridState()
 
@@ -41,10 +37,10 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize(),
 
         topBar = {
-            if(true){
+            if(enableBar.value){
                 TopBar(
                     onListClicked = { /*TODO*/ },
-                    onAccountClicked = accountClicked )
+                    onAccountClicked = {  } )
             }
             else{
                 TopBarMovie(
@@ -56,7 +52,7 @@ fun MainScreen(
 
         bottomBar = {
             BottomBar(
-                onHomeClicked = { /*TODO*/ },
+                onHomeClicked = { navController.navigate("home_screen") { launchSingleTop = true } },
                 onMovieClicked = { /*TODO*/ },
                 onFavoritesClicked = { /*TODO*/ },
                 onSearchClicked = { /*TODO*/ })
@@ -73,10 +69,14 @@ fun MainScreen(
             state = gridState
 
         ){
+
             items(moviesList){
                 if (!it.adultType){
                     MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
-                        imageClicked = { })
+                        imageClicked = {
+                            print("I am clicked")
+                            navController.navigate("movie_screen/${moviesList.indexOf(it)}" ) { popUpTo("home_screen")}
+                        })
                 }
                 if(moviesList.indexOf(it) == moviesList.size-1){
                     viewModelMain.getMovieResults()
@@ -90,5 +90,5 @@ fun MainScreen(
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview(){
-    MainScreen({},{}, {})
+    //MainScreen()
 }

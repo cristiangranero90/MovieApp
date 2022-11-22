@@ -16,10 +16,11 @@ class ViewModelMain @Inject constructor(
     private val movieRepo : MovieRepositoryImp
 ) : ViewModel() {
 
-    private var page = 1
     val isLoading = mutableStateOf(false)
+    private var page = 1
     private val _results = mutableStateListOf<MovieResponse>()
     private val results = _results
+    val barEnabled = mutableStateOf(true)
 
     private fun getPopular()  {
         isLoading.value = true
@@ -39,13 +40,16 @@ class ViewModelMain @Inject constructor(
         return results
     }
 
-    fun getPage() : Int {
-        if (page <= 100){
-            return page++
-        }
-        else {
+    fun getResults() : MutableList<MovieResponse>{
+        return results
+    }
+
+    private fun getPage() : Int {
+        return if (page <= 100){
+            page++
+        } else {
             page = 1
-            return page
+            page
         }
     }
 }
