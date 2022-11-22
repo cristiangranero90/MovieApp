@@ -2,6 +2,7 @@ package com.progressapp.movieapp.composable.moviescreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -30,8 +31,6 @@ fun MovieScreen(
     modifier: Modifier = Modifier
 
 ){
-    print("El numero que llego bueyu $selected")
-
     val movieSelected = vm.getResults()[selected]
     val scaffoldState = rememberScaffoldState()
 
@@ -54,41 +53,52 @@ fun MovieScreen(
     
     ) {
 
-        Column(
+        LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.Top
+            userScrollEnabled = true,
+            contentPadding = PaddingValues(10.dp)
+
         ) {
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .size(300.dp),
-                contentAlignment = Alignment.BottomStart,
-            ) {
-                AsyncImage(
-                    model = imageUrl + movieSelected.movieImage,
-                    contentDescription = "Movie image",
-                    modifier = Modifier.fillMaxWidth()
-                )
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Default.Star,
-                        contentDescription = "Add to favorites",
-                    modifier = Modifier.clip(CircleShape).size(60.dp).background(Color.Yellow))
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .size(300.dp),
+                    contentAlignment = Alignment.BottomStart,
+                ) {
+                    AsyncImage(
+                        model = imageUrl + movieSelected.movieImage,
+                        contentDescription = "Movie image",
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Star,
+                            contentDescription = "Add to favorites",
+                            modifier = Modifier.clip(CircleShape).size(60.dp)
+                                .background(Color.Yellow)
+                        )
+                    }
                 }
+
+                Spacer(modifier = Modifier.size(10.dp))
+
+                Text(
+                    text = "Description: ",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.size(10.dp))
+
+
+                Text(
+                    text = "    " + movieSelected.movieDescription,
+                    fontSize = 18.sp
+                )
+
             }
-
-            Spacer(modifier = Modifier.size(10.dp))
-
-            Text(text = movieSelected.originalTitle,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold)
-
-            Spacer(modifier = Modifier.size(10.dp))
-
-            Text(text = movieSelected.movieDescription,
-                fontSize = 18.sp)
-
         }
     }
 }
