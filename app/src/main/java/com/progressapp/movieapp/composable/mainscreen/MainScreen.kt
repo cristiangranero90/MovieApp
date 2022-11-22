@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -33,6 +34,7 @@ fun MainScreen(
     val isLoading = remember { viewModelMain.isLoading }
     val moviesList = remember { viewModelMain.getMovieResults() }
     val scaffoldState = rememberScaffoldState()
+    val gridState = rememberLazyGridState()
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -64,14 +66,21 @@ fun MainScreen(
         ProgressIndicator(showIndicator = isLoading.value)
 
         LazyVerticalGrid(
+
             columns = GridCells.Fixed(3),
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
+            state = gridState
 
         ){
             items(moviesList){
-                MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
-                    imageClicked = { })
+                if (!it.adultType){
+                    MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
+                        imageClicked = { })
+                }
+                if(moviesList.indexOf(it) == moviesList.size-1){
+                    viewModelMain.getMovieResults()
+                }
             }
         }
     }
