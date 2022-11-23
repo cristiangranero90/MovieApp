@@ -7,12 +7,14 @@ data class MovieList(
 )
 
 data class MovieResponse (
-
     @SerializedName ("adult") var adultType : Boolean,
     @SerializedName ("release_date") var relaseDate : String,
     @SerializedName ("id") var MovieId: Long,
-    @SerializedName ("original_title")var originalTitle : String,
+    @SerializedName ("title")var title : String,
     @SerializedName ("overview") var movieDescription : String,
-    @SerializedName ("poster_path") var movieImage : String
-
+    @SerializedName ("poster_path") var movieImage : String,
+    @SerializedName ("original_title") var original_title: String,
+    @SerializedName ("original_language") var original_language: String,
+    @SerializedName ("vote_average") var punctuation: Double,
+    @SerializedName ("genre_ids") var genre: List<Int>,
     )
