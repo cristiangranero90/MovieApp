@@ -44,7 +44,7 @@ fun MovieScreen(
 
         floatingActionButton = {
             FloatingActionButton(onClick = { /*TODO*/ }) {
-                Icon(imageVector = Icons.Default.Favorite, contentDescription = "Add to favourites")
+                Icon(imageVector = Icons.Default.Favorite, contentDescription = "Add to favourites", tint = Color.Red)
             }
         },
         floatingActionButtonPosition = FabPosition.Center,
