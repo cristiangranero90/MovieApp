@@ -1,5 +1,6 @@
 package com.progressapp.movieapp.ui
 
+import android.widget.Toast
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -28,22 +29,19 @@ class ViewModelMain @Inject constructor(
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             try{
-                _results.addAll(movieRepo.getPopularMovies(lang, getPage().toString()).movieList)
+                _results
+                    .addAll(movieRepo
+                    .getPopularMovies(lang,
+                        getPage()
+                        .toString())
+                    .movieList)
             }
             catch (e: Exception ) {
                 println(e.toString())
+                Toast.makeText(null, "Internet problems", Toast.LENGTH_SHORT)
             }
         }
         isLoading.value = false
-    }
-
-    fun getMovieResults(): MutableList<MovieResponse> {
-        getPopular()
-        return results
-    }
-
-    fun getResults() : MutableList<MovieResponse>{
-        return results
     }
 
     private fun getPage() : Int {
@@ -53,6 +51,15 @@ class ViewModelMain @Inject constructor(
             page = 1
             page
         }
+    }
+
+    fun getMovieResults(): MutableList<MovieResponse> {
+        getPopular()
+        return results
+    }
+
+    fun getResults() : MutableList<MovieResponse>{
+        return results
     }
 }
 

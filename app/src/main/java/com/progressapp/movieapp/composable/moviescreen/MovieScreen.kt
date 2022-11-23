@@ -113,10 +113,18 @@ fun MovieScreen(
 
                         Spacer(modifier = Modifier.size(10.dp))
 
-                        Text(
-                            text = "    " + movieSelected.movieDescription,
-                            fontSize = 18.sp
-                        )
+                        if (movieSelected.movieDescription.isNullOrBlank()){
+                            Text(
+                                text = "No description...",
+                                fontSize = 18.sp
+                            )
+                        }
+                        else{
+                            Text(
+                                text = "    " + movieSelected.movieDescription,
+                                fontSize = 18.sp
+                            )
+                        }
 
                         Spacer(modifier = Modifier.size(30.dp))
                     }
