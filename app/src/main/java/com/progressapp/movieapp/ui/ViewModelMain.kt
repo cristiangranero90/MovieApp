@@ -9,6 +9,7 @@ import com.progressapp.movieapp.repositories.MovieRepositoryImp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,6 +18,7 @@ class ViewModelMain @Inject constructor(
 ) : ViewModel() {
 
     val isLoading = mutableStateOf(false)
+    private var lang: String = Locale.getDefault().language + "-" + Locale.getDefault().country
     private var page = 1
     private val _results = mutableStateListOf<MovieResponse>()
     private val results = _results
@@ -26,7 +28,7 @@ class ViewModelMain @Inject constructor(
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             try{
-                _results.addAll(movieRepo.getPopularMovies(getPage().toString()).movieList)
+                _results.addAll(movieRepo.getPopularMovies(lang, getPage().toString()).movieList)
             }
             catch (e: Exception ) {
                 println(e.toString())

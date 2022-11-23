@@ -21,9 +21,9 @@ class MovieRepositoryImp @Inject constructor(
         }
     }
 
-    override suspend fun getPopularMovies(page: String): MovieList {
+    override suspend fun getPopularMovies(lang: String, page: String): MovieList {
 
-        val response : Response<MovieList> = dataSource.getPopularMovies(page)
+        val response : Response<MovieList> = dataSource.getPopularMovies(lang, page)
 
         if (response.isSuccessful){
             return response.body()!!
