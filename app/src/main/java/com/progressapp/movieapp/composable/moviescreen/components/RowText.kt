@@ -16,16 +16,43 @@ import androidx.compose.ui.unit.dp
 fun RowText(
     vote: Double,
     date: String,
-    genres: List<Int>
-
+    genres: String
     ){
+
     Row(
-        modifier = Modifier.fillMaxWidth().padding(10.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        AddText(text = "Vote: $vote")
+        AddVote(vote)
         AddText(text = "Date:  $date")
-        AddText(text = genres[0].toString())
+        AddText(text = genres)
+    }
+}
+@Composable
+fun AddVote(
+    vote: Double
+){
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .clip(RoundedCornerShape(2f))
+
+    ) {
+
+        if (vote < 7.0){
+            Text(
+                text = "Vote: $vote",
+                color = Color.Red,
+                fontWeight = FontWeight.Bold,
+            )
+        }
+        else{
+            Text(
+                text = "Vote: $vote",
+                fontWeight = FontWeight.Bold,
+                color = Color.Green,
+            )
+        }
     }
 }
 
@@ -42,7 +69,6 @@ fun AddText(text: String){
         Text(
             text = text,
             fontWeight = FontWeight.Bold,
-            color = Color.White,
             modifier = Modifier
         )
     }
@@ -51,5 +77,5 @@ fun AddText(text: String){
 @Preview(showBackground = true, backgroundColor = 20)
 @Composable
 fun RowTextPreview(){
-    RowText(vote = 123.0,"2", listOf(23)  )
+    RowText(vote = 123.0,"2", "horror"  )
 }

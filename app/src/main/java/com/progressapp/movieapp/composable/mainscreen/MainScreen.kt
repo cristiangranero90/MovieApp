@@ -59,27 +59,29 @@ fun MainScreen(
         }
     ) {
 
-        ProgressIndicator(showIndicator = isLoading.value)
+        if (isLoading.value){
+            ProgressIndicator()
+        }
+        else{
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(3),
+                modifier = Modifier
+                    .fillMaxSize(),
+                state = gridState
 
-        LazyVerticalGrid(
+            ){
 
-            columns = GridCells.Fixed(3),
-            modifier = Modifier
-                .fillMaxSize(),
-            state = gridState
-
-        ){
-
-            items(moviesList){
-                if (!it.adultType){
-                    MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
-                        imageClicked = {
-                            print("I am clicked")
-                            navController.navigate("movie_screen/${moviesList.indexOf(it)}" ) { popUpTo("home_screen")}
-                        })
-                }
-                if(moviesList.indexOf(it) == moviesList.size-1){
-                    viewModelMain.getMovieResults()
+                items(moviesList){
+                    if (!it.adultType){
+                        MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
+                            imageClicked = {
+                                print("I am clicked")
+                                navController.navigate("movie_screen/${moviesList.indexOf(it)}" ) { popUpTo("home_screen")}
+                            })
+                    }
+                    if(moviesList.indexOf(it) == moviesList.size-1){
+                        viewModelMain.getMovieResults()
+                    }
                 }
             }
         }

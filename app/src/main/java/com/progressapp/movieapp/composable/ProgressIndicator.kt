@@ -10,26 +10,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ProgressIndicator(
-    showIndicator: Boolean
-){
-    if(showIndicator){
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Box(
-                modifier = Modifier,
-                contentAlignment = Alignment.Center,
+fun ProgressIndicator(){
 
-                ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(60.dp),
-                    color = Color.Cyan,
-                    strokeWidth = 6.dp,
-                )
-            }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            modifier = Modifier,
+            contentAlignment = Alignment.Center,
+
+            ) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(60.dp),
+                color = Color.Cyan,
+                strokeWidth = 6.dp,
+            )
         }
     }
 }
@@ -37,5 +34,5 @@ fun ProgressIndicator(
 @Preview(showBackground = true)
 @Composable
 fun ProgressIndicatorPreview(){
-    ProgressIndicator(showIndicator = true)
+    ProgressIndicator()
 }
