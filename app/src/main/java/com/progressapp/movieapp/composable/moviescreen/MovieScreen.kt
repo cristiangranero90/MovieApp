@@ -108,7 +108,7 @@ private fun InformationView(
         RowText(
             vote = movieSelected.vote_average,
             date = movieSelected.release_date,
-            genres = movieSelected.genres[0].name
+            genres = if (!movieSelected.genres.isNullOrEmpty()) movieSelected.genres[0].name else "No genre"
         )
 
         Spacer(modifier = Modifier.size(10.dp))
