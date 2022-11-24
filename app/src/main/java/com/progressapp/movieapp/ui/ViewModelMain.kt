@@ -20,7 +20,7 @@ class ViewModelMain @Inject constructor(
 ) : ViewModel() {
 
     val isLoading = mutableStateOf(false)
-    private var lang: String = Locale.getDefault().language + "-" + Locale.getDefault().country
+    private val lang: String = Locale.getDefault().language + "-" + Locale.getDefault().country
     private var page = 1
     private val _results = mutableStateListOf<MovieResponse>()
     private val results = _results
@@ -40,7 +40,6 @@ class ViewModelMain @Inject constructor(
             }
             catch (e: Exception ) {
                 println(e.toString())
-                Toast.makeText(null, "Internet problems", Toast.LENGTH_SHORT)
             }
             isLoading.value = false
         }

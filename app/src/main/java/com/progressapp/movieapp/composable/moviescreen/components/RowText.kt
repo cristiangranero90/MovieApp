@@ -24,7 +24,7 @@ fun RowText(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         AddVote(vote)
-        AddText(text = "Date:  $date")
+        AddText(text = date)
         AddText(text = genres)
     }
 }
