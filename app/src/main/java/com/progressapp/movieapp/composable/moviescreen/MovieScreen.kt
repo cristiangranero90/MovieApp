@@ -209,14 +209,14 @@ private fun TextTitle(
 @Composable
 private fun ImageView(
     imageUrl: String,
-    movieSelected: MovieDetailed
+    movieDetailed: MovieDetailed
 ) {
     Box(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.BottomCenter
     ) {
         AsyncImage(
-            model = imageUrl + movieSelected.poster_path,
+            model = imageUrl + movieDetailed.poster_path,
             contentDescription = "Movie image",
             modifier = Modifier
                 .shadow(20.dp, spotColor = Color.Black)

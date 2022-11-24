@@ -11,6 +11,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 @Composable
 fun RowText(
@@ -39,20 +41,19 @@ fun AddVote(
 
     ) {
 
-        if (vote < 7.0){
-            Text(
-                text = "Vote: $vote",
-                color = Color.Red,
-                fontWeight = FontWeight.Bold,
-            )
+        var colorSelected = when(vote){
+            in 0.0..4.0 -> Color.Red
+            in 4.1..6.9 -> Color(0xFFE45E34)
+            else -> {
+                Color.Green
+            }
         }
-        else{
-            Text(
-                text = "Vote: $vote",
-                fontWeight = FontWeight.Bold,
-                color = Color.Green,
-            )
-        }
+
+        Text(
+            text = "Vote: " + String.format("%.1f", vote).toDouble(),
+            color = colorSelected,
+            fontWeight = FontWeight.Bold,
+        )
     }
 }
 
