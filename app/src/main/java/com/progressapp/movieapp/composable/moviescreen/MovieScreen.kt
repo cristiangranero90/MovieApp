@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -89,7 +90,7 @@ fun MovieScreen(
                 }
 
                 item {
-                    InformationView(movieDetails)
+                    InformationView(movieDetails, {/*TODO: Post value buttton*/ })
                 }
             }
         }
@@ -99,7 +100,8 @@ fun MovieScreen(
 
 @Composable
 private fun InformationView(
-    movieSelected: MovieDetailed
+    movieSelected: MovieDetailed,
+    voteClicked: () -> Unit,
 ) {
     Column() {
 
@@ -108,8 +110,22 @@ private fun InformationView(
         RowText(
             vote = movieSelected.vote_average,
             date = movieSelected.release_date,
-            genres = if (!movieSelected.genres.isNullOrEmpty()) movieSelected.genres[0].name else "No genre"
+            genres = if (movieSelected.genres.isNotEmpty()) movieSelected.genres[0].name else "No genre"
         )
+
+        Spacer(modifier = Modifier.size(10.dp))
+        
+        Button(onClick = { voteClicked() }) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(text = "Vote", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                Spacer(modifier = Modifier.size(5.dp))
+                Icon(imageVector = Icons.Default.ThumbUp , contentDescription = "Vote")
+            }
+        }
 
         Spacer(modifier = Modifier.size(10.dp))
 
@@ -135,7 +151,7 @@ private fun InformationView(
 private fun SeeMoreText(
     text: String
 ){
-    if (text.isNullOrBlank()) {
+    if (text.isBlank()) {
         Text(
             text = "No more information...",
             fontSize = 18.sp
@@ -160,9 +176,10 @@ private fun SeeMoreText(
                 // at the clicked position
                 annotatedText.getStringAnnotations(tag = "URL", start = offset,
                     end = offset)
-                    .firstOrNull()?.let { annotation ->
-                        uriHandler.openUri(annotation.item)
-                        Log.d("Clicked URL", annotation.item)
+                    .firstOrNull()?.let {
+                            annotation ->
+                                uriHandler.openUri(annotation.item)
+                                Log.d("Clicked URL", annotation.item)
                     }
             }
         )
@@ -197,7 +214,7 @@ private fun TextTitle(
     ) {
         Column(modifier = Modifier) {
             Text(
-                text = "$text",
+                text = text,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
             )

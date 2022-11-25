@@ -24,7 +24,6 @@ fun TopBar(
     onAccountClicked: () -> Unit,
     modifier: Modifier = Modifier
 ){
-
     Row(
         modifier = Modifier
             .fillMaxWidth()

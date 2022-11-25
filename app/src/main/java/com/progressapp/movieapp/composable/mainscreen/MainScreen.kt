@@ -76,7 +76,6 @@ fun MainScreen(
                     if (!it.adultType){
                         MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
                             imageClicked = {
-                                print("I am clicked")
                                 navController.navigate("movie_screen/${moviesList.indexOf(it)}" ) { popUpTo("home_screen")}
                             })
                     }

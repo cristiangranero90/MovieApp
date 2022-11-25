@@ -17,7 +17,6 @@ fun MovieItemView(
     imageClicked: () -> Unit,
     modifier: Modifier = Modifier
 ){
-
     Box(
         modifier.fillMaxSize().padding(1.dp)
     ) {
@@ -28,7 +27,6 @@ fun MovieItemView(
                 .fillMaxSize()
         )
     }
-
 }
 
 @Preview(showBackground = true)
