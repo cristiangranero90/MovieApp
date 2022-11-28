@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.progressapp.movieapp.composable.mainscreen.MainScreen
 import com.progressapp.movieapp.composable.moviescreen.MovieScreen
+import com.progressapp.movieapp.composable.samplenav.Sample
 import com.progressapp.movieapp.composable.splashscreen.SplashScreen
 import com.progressapp.movieapp.ui.ViewModelMain
 
@@ -23,13 +24,16 @@ fun Navigation(
     NavHost(navController = navController, startDestination = "splash_screen") {
 
         composable("splash_screen") {
-
             SplashScreen(navController = navController)
         }
 
         composable("home_screen") {
 
             MainScreen(navController = navController, viewModelMain)
+        }
+
+        composable("sample_screen"){
+            Sample()
         }
 
         composable(

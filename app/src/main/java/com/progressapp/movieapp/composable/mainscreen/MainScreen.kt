@@ -19,6 +19,7 @@ import com.progressapp.movieapp.composable.mainscreen.components.BottomBar
 import com.progressapp.movieapp.composable.mainscreen.components.MovieItemView
 import com.progressapp.movieapp.composable.mainscreen.components.TopBar
 import com.progressapp.movieapp.composable.moviescreen.components.TopBarMovie
+import com.progressapp.movieapp.composable.samplenav.Sample
 import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
@@ -39,28 +40,21 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize(),
 
         topBar = {
-            if(enableBar.value){
-                TopBar(
-                    onListClicked = { /*TODO*/ },
-                    onAccountClicked = {  } )
-            }
-            else{
-                TopBarMovie(
-                    movieTitle = "Some title",
-                    onBackClcked = { /*TODO*/ },
-                    onProfileClicked = { /*TODO*/ } )
-            }
+            TopBar(
+                onListClicked = { /*TODO*/ },
+                onAccountClicked = { /*TODO*/ })
         },
 
         bottomBar = {
             BottomBar(
                 onHomeClicked = { navController.navigate("home_screen") { launchSingleTop = true } },
-                onMovieClicked = { /*TODO*/ },
+                onMovieClicked = { navController.navigate("sample_screen") },
                 onFavoritesClicked = { /*TODO*/ },
                 onSearchClicked = { /*TODO*/ })
         }
     ) {
         padding ->
+
 
         if (isLoading.value){
             ProgressIndicator(modifier = Modifier.padding(padding))

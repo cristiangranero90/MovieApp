@@ -31,7 +31,7 @@ fun BottomBar(
             selected = (selectedItem.value == 0),
             onClick = {
                 selectedItem.value = 0
-                onHomeClicked
+                onHomeClicked()
             }
         )
 
@@ -40,9 +40,8 @@ fun BottomBar(
             label = { Text(text = "Movies")},
             selected = (selectedItem.value == 1),
             onClick = {
-                selectedItem.value = 1
-                onMovieClicked
-            }
+                onMovieClicked()
+                selectedItem.value = 1}
         )
 
         BottomNavigationItem(
@@ -51,7 +50,7 @@ fun BottomBar(
             selected = (selectedItem.value == 2),
             onClick = {
                 selectedItem.value = 2
-                onFavoritesClicked
+                onFavoritesClicked()
             }
         )
 
@@ -61,7 +60,7 @@ fun BottomBar(
             selected = (selectedItem.value == 3),
             onClick = {
                 selectedItem.value = 3
-                onSearchClicked
+                onSearchClicked()
             }
         )
     }

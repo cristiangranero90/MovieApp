@@ -8,8 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.ThumbUp
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -26,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.progressapp.movieapp.composable.ProgressIndicator
 import com.progressapp.movieapp.composable.mainscreen.components.BottomBar
+import com.progressapp.movieapp.composable.moviescreen.components.CustomDialog
 import com.progressapp.movieapp.composable.moviescreen.components.RowText
 import com.progressapp.movieapp.composable.moviescreen.components.TopBarMovie
 import com.progressapp.movieapp.model.MovieDetailed
@@ -45,6 +45,8 @@ fun MovieScreen(
     val scaffoldState = rememberScaffoldState()
     val isLoading = remember { vm.isLoading }
     val movieDetails = vm.getDetail(movieSelected.MovieId)
+    var showDialog by remember { mutableStateOf(false) }
+    var vote by remember { mutableStateOf(0.0) }
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -75,6 +77,12 @@ fun MovieScreen(
     ) {
         padding ->
 
+        CustomDialog(onButtonAccept = {
+            vote = it
+            showDialog = false },
+            onButtonDismis = { showDialog = false },
+            show = showDialog)
+
         if (isLoading.value) {
             ProgressIndicator(modifier = Modifier.padding(padding))
         }
@@ -93,11 +101,10 @@ fun MovieScreen(
                 }
 
                 item {
-                    InformationView(movieDetails, {/*TODO: Post value buttton*/ })
+                    InformationView(movieDetails) { showDialog = true }
                 }
             }
         }
-
     }
 }
 

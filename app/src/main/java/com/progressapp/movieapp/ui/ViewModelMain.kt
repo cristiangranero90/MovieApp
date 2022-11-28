@@ -20,7 +20,6 @@ class ViewModelMain @Inject constructor(
     private val movieRepo : MovieRepositoryImp
 ) : ViewModel() {
 
-    private val lang: String = Locale.getDefault().language + "-" + Locale.getDefault().country
     private var page = 1
     private val _results = mutableStateListOf<MovieResponse>()
     private val results = _results
@@ -35,7 +34,6 @@ class ViewModelMain @Inject constructor(
                 _results
                     .addAll(movieRepo
                     .getPopularMovies(
-                        lang,
                         getPage().toString())
                     .movieList)
             }
@@ -59,7 +57,7 @@ class ViewModelMain @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
             try {
-                movieDetailed = movieRepo.getDetailedMovie(id, lang)
+                movieDetailed = movieRepo.getDetailedMovie(id)
             }
             catch (e: Exception){
                 println(e.toString())
