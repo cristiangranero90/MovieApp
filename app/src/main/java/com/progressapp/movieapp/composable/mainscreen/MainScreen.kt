@@ -2,6 +2,7 @@ package com.progressapp.movieapp.composable.mainscreen
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -59,14 +60,16 @@ fun MainScreen(
                 onSearchClicked = { /*TODO*/ })
         }
     ) {
+        padding ->
 
         if (isLoading.value){
-            ProgressIndicator()
+            ProgressIndicator(modifier = Modifier.padding(padding))
         }
         else{
             LazyVerticalGrid(
                 columns = GridCells.Fixed(3),
                 modifier = Modifier
+                    .padding(padding)
                     .fillMaxSize(),
                 state = gridState
 

@@ -73,13 +73,16 @@ fun MovieScreen(
         }
     
     ) {
+        padding ->
 
         if (isLoading.value) {
-            ProgressIndicator()
+            ProgressIndicator(modifier = Modifier.padding(padding))
         }
         else{
             LazyColumn(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .padding(padding)
+                    .fillMaxSize(),
                 userScrollEnabled = true,
                 contentPadding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 45.dp)
 
@@ -103,7 +106,7 @@ private fun InformationView(
     movieSelected: MovieDetailed,
     voteClicked: () -> Unit,
 ) {
-    Column() {
+    Column {
 
         Spacer(modifier = Modifier.size(10.dp))
 
@@ -114,7 +117,8 @@ private fun InformationView(
         )
 
         Spacer(modifier = Modifier.size(10.dp))
-        
+
+        //Vote button
         Button(onClick = { voteClicked() }) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -128,6 +132,9 @@ private fun InformationView(
         }
 
         Spacer(modifier = Modifier.size(10.dp))
+        /* TODO: Available on:
+        TextTitle(text = "Available On")
+        Spacer(modifier = Modifier.size(10.dp)) */
 
         TextTitle(text = "Overview ")
 
@@ -143,7 +150,6 @@ private fun InformationView(
 
         SeeMoreText(text = movieSelected.homepage)
 
-        Spacer(modifier = Modifier.size(30.dp))
     }
 }
 

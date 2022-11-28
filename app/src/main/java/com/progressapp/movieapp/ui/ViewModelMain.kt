@@ -1,6 +1,5 @@
 package com.progressapp.movieapp.ui
 
-import android.widget.Toast
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -14,17 +13,19 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
+
+
 @HiltViewModel
 class ViewModelMain @Inject constructor(
     private val movieRepo : MovieRepositoryImp
 ) : ViewModel() {
 
-    val isLoading = mutableStateOf(false)
     private val lang: String = Locale.getDefault().language + "-" + Locale.getDefault().country
     private var page = 1
     private val _results = mutableStateListOf<MovieResponse>()
     private val results = _results
     private var movieDetailed: MovieDetailed = getDetail(500)
+    val isLoading = mutableStateOf(false)
     val barEnabled = mutableStateOf(true)
 
     private fun getPopular()  {
@@ -33,9 +34,9 @@ class ViewModelMain @Inject constructor(
             try{
                 _results
                     .addAll(movieRepo
-                    .getPopularMovies(lang,
-                        getPage()
-                        .toString())
+                    .getPopularMovies(
+                        lang,
+                        getPage().toString())
                     .movieList)
             }
             catch (e: Exception ) {
@@ -56,7 +57,6 @@ class ViewModelMain @Inject constructor(
 
     private fun getMovieDetails(id: Long){
         viewModelScope.launch(Dispatchers.Main) {
-            print("Value of: " + isLoading.value)
             isLoading.value = true
             try {
                 movieDetailed = movieRepo.getDetailedMovie(id, lang)

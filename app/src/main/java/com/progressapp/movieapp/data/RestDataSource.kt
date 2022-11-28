@@ -14,9 +14,13 @@ interface RestDataSource {
     suspend fun getLatestMovie() : Response<MovieResponse>
 
     @GET("movie/popular?api_key=cb86974c362f47d464bb3b6c94b8f7c2&&")
-    suspend fun getPopularMovies(@Query ("language") lang: String, @Query ("page") page: String) : Response<MovieList>
+    suspend fun getPopularMovies(@Query ("language") lang: String,
+                                 @Query ("page") page: String)
+    : Response<MovieList>
 
     @GET("movie/{movie_id}?api_key=cb86974c362f47d464bb3b6c94b8f7c2&")
-    suspend fun getMovieDetails(@Path("movie_id") id: Long, @Query("language") lang: String) : Response<MovieDetailed>
+    suspend fun getMovieDetails(@Path("movie_id") id: Long,
+                                @Query("language") lang: String)
+    : Response<MovieDetailed>
 
 }
