@@ -44,7 +44,7 @@ fun Navigation(
             MovieScreen(
                 viewModelMain,
                 selected = backStackEntry.arguments!!.getInt("id"),
-                backClicked = { /*TODO*/ },
+                backClicked = { navController.navigate("home_screen" ) { launchSingleTop = true } },
                 accountCliked = { /*TODO*/ })
 
         }

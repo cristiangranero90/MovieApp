@@ -1,6 +1,5 @@
 package com.progressapp.movieapp.composable.mainscreen
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -18,8 +17,6 @@ import com.progressapp.movieapp.composable.ProgressIndicator
 import com.progressapp.movieapp.composable.mainscreen.components.BottomBar
 import com.progressapp.movieapp.composable.mainscreen.components.MovieItemView
 import com.progressapp.movieapp.composable.mainscreen.components.TopBar
-import com.progressapp.movieapp.composable.moviescreen.components.TopBarMovie
-import com.progressapp.movieapp.composable.samplenav.Sample
 import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
@@ -73,7 +70,8 @@ fun MainScreen(
                     if (!it.adultType){
                         MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
                             imageClicked = {
-                                navController.navigate("movie_screen/${moviesList.indexOf(it)}" ) { popUpTo("home_screen")}
+                                navController.navigate("movie_screen/${moviesList.indexOf(it)}" )
+                                { popUpTo("home_screen") { saveState = true } }
                             })
                     }
                     if(moviesList.indexOf(it) == moviesList.size-1){
