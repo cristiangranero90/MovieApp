@@ -9,9 +9,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
 
 @Composable
 fun BottomBar(
+    currentDestination: NavDestination?,
     onHomeClicked: () -> Unit,
     onMovieClicked: () -> Unit,
     onFavoritesClicked: () -> Unit,
@@ -28,9 +31,8 @@ fun BottomBar(
         BottomNavigationItem(
             icon = { Icon(imageVector = Icons.Default.Home, contentDescription = "Home Screen") },
             label = { Text(text = "Home")},
-            selected = (selectedItem.value == 0),
+            selected = currentDestination?.hierarchy?.any { it.route == "home_screen" } == true,
             onClick = {
-                selectedItem.value = 0
                 onHomeClicked()
             }
         )
@@ -38,10 +40,10 @@ fun BottomBar(
         BottomNavigationItem(
             icon = { Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "Movies screen") },
             label = { Text(text = "Movies")},
-            selected = (selectedItem.value == 1),
+            selected = currentDestination?.hierarchy?.any { it.route == "sample_screen" } == true,
             onClick = {
                 onMovieClicked()
-                selectedItem.value = 1}
+            }
         )
 
         BottomNavigationItem(
@@ -69,5 +71,5 @@ fun BottomBar(
 @Preview(showBackground = true)
 @Composable
 fun BottomBarPreview(){
-    BottomBar({},{},{},{})
+    BottomBar(null,{},{},{},{})
 }

@@ -12,17 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import com.progressapp.movieapp.composable.ProgressIndicator
-import com.progressapp.movieapp.composable.mainscreen.components.BottomBar
 import com.progressapp.movieapp.composable.mainscreen.components.MovieItemView
 import com.progressapp.movieapp.composable.mainscreen.components.TopBar
 import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
 fun MainScreen(
-    navController: NavController,
+    bottomNav: @Composable () -> Unit,
     viewModelMain: ViewModelMain,
+    imageClicked: (Int) -> Unit,
     BASE_IMAGE_URL: String = "https://image.tmdb.org/t/p/w500",
     modifier: Modifier = Modifier
 ){
@@ -42,13 +41,7 @@ fun MainScreen(
                 onAccountClicked = { /*TODO*/ })
         },
 
-        bottomBar = {
-            BottomBar(
-                onHomeClicked = { navController.navigate("home_screen") { launchSingleTop = true } },
-                onMovieClicked = { navController.navigate("sample_screen") },
-                onFavoritesClicked = { /*TODO*/ },
-                onSearchClicked = { /*TODO*/ })
-        }
+        bottomBar =  { bottomNav() } ,
     ) {
         padding ->
 
@@ -70,8 +63,7 @@ fun MainScreen(
                     if (!it.adultType){
                         MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
                             imageClicked = {
-                                navController.navigate("movie_screen/${moviesList.indexOf(it)}" )
-                                { popUpTo("home_screen") { saveState = true } }
+                                imageClicked(moviesList.indexOf(it))
                             })
                     }
                     if(moviesList.indexOf(it) == moviesList.size-1){

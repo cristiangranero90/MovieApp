@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.progressapp.movieapp.composable.ProgressIndicator
-import com.progressapp.movieapp.composable.mainscreen.components.BottomBar
 import com.progressapp.movieapp.composable.moviescreen.components.CustomDialog
 import com.progressapp.movieapp.composable.moviescreen.components.RowText
 import com.progressapp.movieapp.composable.moviescreen.components.TopBarMovie
@@ -33,6 +32,7 @@ import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
 fun MovieScreen(
+    bottomNav: @Composable () -> Unit,
     vm: ViewModelMain,
     selected: Int,
     backClicked: () -> Unit,
@@ -66,13 +66,7 @@ fun MovieScreen(
                 onBackClcked = backClicked,
                 onProfileClicked = accountCliked)
         },
-        bottomBar = {
-            BottomBar(
-                onHomeClicked = { /*TODO*/ },
-                onMovieClicked = { /*TODO*/ },
-                onFavoritesClicked = { /*TODO*/ },
-                onSearchClicked = { /*TODO*/ })
-        }
+        bottomBar = { bottomNav () }
     
     ) {
         padding ->

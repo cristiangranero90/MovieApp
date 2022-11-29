@@ -40,7 +40,7 @@ fun SplashScreen(navController: NavController){
             )
         )
         delay(3000L)
-        navController.navigate("home_screen")
+        navController.navigate("home_screen") { popUpTo("splash_screen") }
     }
 
     Column(
