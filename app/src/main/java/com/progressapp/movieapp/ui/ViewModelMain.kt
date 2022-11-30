@@ -30,7 +30,6 @@ class ViewModelMain @Inject constructor(
     private val resultsNowPlaying = _resultsNowPlaying
     private var movieDetailed: MovieDetailed = getDetail(500)
     val isLoading = mutableStateOf(false)
-    val barEnabled = mutableStateOf(true)
 
     private fun getPopular()  {
         viewModelScope.launch(Dispatchers.IO) {

@@ -27,7 +27,6 @@ fun MainScreen(
 ){
     val isLoading = remember { viewModelMain.isLoading }
     val moviesList = remember { viewModelMain.getMovieResults() }
-    val enableBar = remember { viewModelMain.barEnabled }
     val scaffoldState = rememberScaffoldState()
     val gridState = rememberLazyGridState()
 
