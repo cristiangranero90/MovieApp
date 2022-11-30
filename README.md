@@ -5,3 +5,5 @@
 3. Hilt
 4. ViewModel
 5. Jetpack Compose
+
+Logos: blue_long_big.xml and blue_long.xml, are property of the TMDB
