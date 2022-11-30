@@ -12,8 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
-
 @HiltViewModel
 class ViewModelMain @Inject constructor(
     private val movieRepo : MovieRepositoryImp
@@ -59,7 +57,7 @@ class ViewModelMain @Inject constructor(
             catch (e: Exception){
                 println(e.toString())
             }
-            isLoading.value = false
+            isLoading.value = false || (movieDetailed.id != id.toInt())
         }
     }
 
