@@ -26,6 +26,8 @@ class ViewModelMain @Inject constructor(
     private val resultsUpcoming = _resultsUpcoming
     private val _resultsTopRated = mutableStateListOf<MovieResponse>()
     private val resultsTopRated = _resultsTopRated
+    private val _resultsNowPlaying = mutableStateListOf<MovieResponse>()
+    private val resultsNowPlaying = _resultsNowPlaying
     private var movieDetailed: MovieDetailed = getDetail(500)
     val isLoading = mutableStateOf(false)
     val barEnabled = mutableStateOf(true)
@@ -101,6 +103,23 @@ class ViewModelMain @Inject constructor(
             isLoading.value = false
         }
         return resultsTopRated
+    }
+
+    fun getNowPlaying() : MutableList<MovieResponse> {
+        viewModelScope.launch(Dispatchers.Main) {
+            isLoading.value = true
+            try{
+                _resultsNowPlaying
+                    .addAll(movieRepo
+                        .getNowPlaying()
+                        .movieList)
+            }
+            catch (e: Exception ) {
+                println(e.toString())
+            }
+            isLoading.value = false
+        }
+        return resultsNowPlaying
     }
 
     fun getDetail(id: Long): MovieDetailed {

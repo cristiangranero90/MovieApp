@@ -29,4 +29,7 @@ interface RestDataSource {
     @GET("movie/top_rated?api_key=cb86974c362f47d464bb3b6c94b8f7c2&include_adult=false&page=1&")
     suspend fun getTopRated(@Query ("language") lang: String) : Response<MovieList>
 
+    @GET("movie/now_playing?api_key=cb86974c362f47d464bb3b6c94b8f7c2&include_adult=false&")
+    suspend fun getNowPlaying(@Query ("language") lang: String) : Response<MovieList>
+
 }

@@ -17,4 +17,6 @@ interface MovieRepository {
 
     suspend fun getTopRated() : MovieList
 
+    suspend fun getNowPlaying() : MovieList
+
 }
