@@ -32,7 +32,7 @@ interface RestDataSource {
     @GET("movie/now_playing?api_key=cb86974c362f47d464bb3b6c94b8f7c2&include_adult=false")
     suspend fun getNowPlaying(@Query ("language") lang: String) : Response<MovieList>
 
-    @GET("discover/movie?api_key=cb86974c362f47d464bb3b6c94b8f7c2&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate")
+    @GET("discover/movie?api_key=cb86974c362f47d464bb3b6c94b8f7c2&sort_by=popularity.desc&include_adult=false&include_video=false&with_watch_monetization_types=flatrate")
     suspend fun getDiscover(@Query ("language") lang: String) : Response<MovieList>
 
 }

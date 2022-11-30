@@ -1,4 +1,4 @@
-package com.progressapp.movieapp.composable.mainscreen.components
+package com.progressapp.movieapp.composable.moviesviewscreen.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

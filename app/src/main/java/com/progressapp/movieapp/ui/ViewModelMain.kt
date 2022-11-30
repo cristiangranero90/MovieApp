@@ -64,69 +64,77 @@ class ViewModelMain @Inject constructor(
     }
 
     fun getUpcoming() : MutableList<MovieResponse> {
-        viewModelScope.launch(Dispatchers.Main) {
-            isLoading.value = true
-            try{
-                _resultsUpcoming
-                    .addAll(movieRepo
-                        .getUpcoming()
-                        .movieList)
+        if(resultsUpcoming.isEmpty()){
+            viewModelScope.launch(Dispatchers.Main) {
+                isLoading.value = true
+                try{
+                    _resultsUpcoming
+                        .addAll(movieRepo
+                            .getUpcoming()
+                            .movieList)
+                }
+                catch (e: Exception ) {
+                    println(e.toString())
+                }
+                isLoading.value = false
             }
-            catch (e: Exception ) {
-                println(e.toString())
-            }
-            isLoading.value = false
         }
         return resultsUpcoming
     }
 
     fun getTopRated() : MutableList<MovieResponse> {
-        viewModelScope.launch(Dispatchers.Main) {
-            isLoading.value = true
-            try{
-                _resultsTopRated
-                    .addAll(movieRepo
-                        .getTopRated()
-                        .movieList)
+        if(resultsTopRated.isEmpty()){
+            viewModelScope.launch(Dispatchers.Main) {
+                isLoading.value = true
+                try{
+                    _resultsTopRated
+                        .addAll(movieRepo
+                            .getTopRated()
+                            .movieList)
+                }
+                catch (e: Exception ) {
+                    println(e.toString())
+                }
+                isLoading.value = false
             }
-            catch (e: Exception ) {
-                println(e.toString())
-            }
-            isLoading.value = false
         }
         return resultsTopRated
     }
 
     fun getNowPlaying() : MutableList<MovieResponse> {
-        viewModelScope.launch(Dispatchers.Main) {
-            isLoading.value = true
-            try{
-                _resultsNowPlaying
-                    .addAll(movieRepo
-                        .getNowPlaying()
-                        .movieList)
+        if(resultsNowPlaying.isEmpty()){
+            viewModelScope.launch(Dispatchers.Main) {
+                isLoading.value = true
+                try{
+                    _resultsNowPlaying
+                        .addAll(movieRepo
+                            .getNowPlaying()
+                            .movieList)
+                }
+                catch (e: Exception ) {
+                    println(e.toString())
+                }
+                isLoading.value = false
             }
-            catch (e: Exception ) {
-                println(e.toString())
-            }
-            isLoading.value = false
         }
         return resultsNowPlaying
     }
 
     fun getDiscover() : MutableList<MovieResponse> {
-        viewModelScope.launch(Dispatchers.Main) {
-            isLoading.value = true
-            try{
-                _resultsDiscover
-                    .addAll(movieRepo
-                        .getDiscover()
-                        .movieList)
+        if(resultsDiscover.isEmpty()){
+            viewModelScope.launch(Dispatchers.Main) {
+                isLoading.value = true
+                try{
+                    _resultsDiscover
+                        .addAll(0, movieRepo
+                            .getDiscover()
+                            .movieList)
+                }
+                catch (e: Exception ) {
+                    println(e.toString())
+                }
+                isLoading.value = false
             }
-            catch (e: Exception ) {
-                println(e.toString())
-            }
-            isLoading.value = false
         }
         return resultsDiscover
     }

@@ -1,4 +1,4 @@
-package com.progressapp.movieapp.composable.mainscreen.components
+package com.progressapp.movieapp.composable.moviesviewscreen.components
 
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -40,7 +40,7 @@ fun BottomBar(
         BottomNavigationItem(
             icon = { Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "Movies screen") },
             label = { Text(text = "Movies")},
-            selected = currentDestination?.hierarchy?.any { it.route == "sample_screen" } == true,
+            selected = currentDestination?.hierarchy?.any { it.route == "movies_view_screen" } == true,
             onClick = {
                 onMovieClicked()
             }

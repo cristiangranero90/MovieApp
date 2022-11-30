@@ -1,4 +1,4 @@
-package com.progressapp.movieapp.composable.mainscreen
+package com.progressapp.movieapp.composable.moviesviewscreen
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,12 +13,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.progressapp.movieapp.composable.ProgressIndicator
-import com.progressapp.movieapp.composable.mainscreen.components.MovieItemView
-import com.progressapp.movieapp.composable.mainscreen.components.TopBar
+import com.progressapp.movieapp.composable.moviesviewscreen.components.MovieItemView
+import com.progressapp.movieapp.composable.moviesviewscreen.components.TopBar
 import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
-fun MainScreen(
+fun MoviesViewScreen(
     bottomNav: @Composable () -> Unit,
     viewModelMain: ViewModelMain,
     imageClicked: (Int) -> Unit,
@@ -59,12 +59,11 @@ fun MainScreen(
             ){
 
                 items(moviesList){
-                    //if (!it.adultType){
-                        MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
-                            imageClicked = {
-                                imageClicked(it.MovieId.toInt())
-                            })
-                    //}
+                    MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
+                        imageClicked = {
+                            imageClicked(it.MovieId.toInt())
+                        })
+
                     if(moviesList.indexOf(it) == moviesList.size-1){
                         viewModelMain.getMovieResults()
                     }

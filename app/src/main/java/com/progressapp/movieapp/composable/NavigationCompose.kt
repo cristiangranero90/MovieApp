@@ -11,10 +11,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.progressapp.movieapp.composable.homescreen.HomeScreen
-import com.progressapp.movieapp.composable.mainscreen.MainScreen
-import com.progressapp.movieapp.composable.mainscreen.components.BottomBar
+import com.progressapp.movieapp.composable.moviesviewscreen.MoviesViewScreen
+import com.progressapp.movieapp.composable.moviesviewscreen.components.BottomBar
 import com.progressapp.movieapp.composable.moviescreen.MovieScreen
-import com.progressapp.movieapp.composable.samplenav.Sample
 import com.progressapp.movieapp.composable.splashscreen.SplashScreen
 import com.progressapp.movieapp.ui.ViewModelMain
 
@@ -35,8 +34,8 @@ fun Navigation(
                     restoreState = true }
             },
             onMovieClicked = {
-                navController.navigate("sample_screen") {
-                    popUpTo("sample_screen")
+                navController.navigate("movies_view_screen") {
+                    popUpTo("movies_view_screen")
                     launchSingleTop = true
                     restoreState = true }
             },
@@ -52,14 +51,14 @@ fun Navigation(
         }
 
         composable("home_screen") {
+            HomeScreen(vm = viewModelMain, bottomBar = bottomNav, { navController.navigate("movie_screen/$it")} )
 
-            MainScreen(  bottomNav,
-                viewModelMain,
-                { navController.navigate("movie_screen/$it")})
         }
 
-        composable("sample_screen"){
-            HomeScreen(vm = viewModelMain, bottomBar = bottomNav, { navController.navigate("movie_screen/$it")} )
+        composable("movies_view_screen"){
+            MoviesViewScreen(  bottomNav,
+                viewModelMain,
+                { navController.navigate("movie_screen/$it")})
         }
 
         composable(
