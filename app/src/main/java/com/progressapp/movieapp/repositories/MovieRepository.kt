@@ -19,4 +19,6 @@ interface MovieRepository {
 
     suspend fun getNowPlaying() : MovieList
 
+    suspend fun getDiscover() : MovieList
+
 }

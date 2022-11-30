@@ -34,7 +34,7 @@ class MovieRepositoryImp @Inject constructor(
             return response.body()!!
         }
         else{
-            throw RuntimeException("Movie list empty, an error occured")
+            throw RuntimeException("Movie list empty, an error has occurred")
         }
     }
 
@@ -58,7 +58,7 @@ class MovieRepositoryImp @Inject constructor(
             return response.body()!!
         }
         else{
-            throw RuntimeException("Movie list empty, an error occured")
+            throw RuntimeException("Movie list empty, an error has occurred")
         }
     }
 
@@ -70,7 +70,7 @@ class MovieRepositoryImp @Inject constructor(
             return response.body()!!
         }
         else{
-            throw RuntimeException("Movie list empty, an error occured")
+            throw RuntimeException("Movie list empty, an error has occurred")
         }
     }
 
@@ -82,7 +82,19 @@ class MovieRepositoryImp @Inject constructor(
             return response.body()!!
         }
         else{
-            throw RuntimeException("Movie list empty, an error occured")
+            throw RuntimeException("Movie list empty, an error has occurred")
+        }
+    }
+
+    override suspend fun getDiscover(): MovieList {
+
+        val response : Response<MovieList> = dataSource.getDiscover(lang)
+
+        if (response.isSuccessful){
+            return response.body()!!
+        }
+        else{
+            throw RuntimeException("Movie list empty, an error has occurred")
         }
     }
 

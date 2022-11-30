@@ -41,7 +41,6 @@ fun MovieScreen(
     modifier: Modifier = Modifier
 
 ){
-    //val movieSelected = vm.getResults()[selected]
     val scaffoldState = rememberScaffoldState()
     val isLoading = remember { vm.isLoading }
     val movieDetails = vm.getDetail(selected.toLong())
@@ -79,7 +78,11 @@ fun MovieScreen(
 
         LazyColumn(
             modifier = Modifier
-                .padding(padding)
+                .padding(
+                    start = 2.dp,
+                    end = 2.dp,
+                    top = padding.calculateTopPadding(),
+                    bottom = padding.calculateBottomPadding())
                 .fillMaxSize(),
                 contentPadding = padding
             ) {

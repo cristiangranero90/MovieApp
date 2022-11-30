@@ -19,7 +19,6 @@ class ViewModelMain @Inject constructor(
     private val movieRepo : MovieRepositoryImp
 ) : ViewModel() {
 
-    private var page = 1
     private val _resultsPopular = mutableStateListOf<MovieResponse>()
     private val resultsPopular = _resultsPopular
     private val _resultsUpcoming = mutableStateListOf<MovieResponse>()
@@ -28,7 +27,10 @@ class ViewModelMain @Inject constructor(
     private val resultsTopRated = _resultsTopRated
     private val _resultsNowPlaying = mutableStateListOf<MovieResponse>()
     private val resultsNowPlaying = _resultsNowPlaying
+    private val _resultsDiscover = mutableStateListOf<MovieResponse>()
+    private val resultsDiscover = _resultsDiscover
     private var movieDetailed: MovieDetailed = getDetail(500)
+    private var page = 1
     val isLoading = mutableStateOf(false)
 
     private fun getPopular()  {
@@ -45,15 +47,6 @@ class ViewModelMain @Inject constructor(
                 println(e.toString())
             }
             isLoading.value = false
-        }
-    }
-
-    private fun getPage() : Int {
-        return if (page <= 100){
-            page++
-        } else {
-            page = 1
-            page
         }
     }
 
@@ -119,6 +112,32 @@ class ViewModelMain @Inject constructor(
             isLoading.value = false
         }
         return resultsNowPlaying
+    }
+
+    fun getDiscover() : MutableList<MovieResponse> {
+        viewModelScope.launch(Dispatchers.Main) {
+            isLoading.value = true
+            try{
+                _resultsDiscover
+                    .addAll(movieRepo
+                        .getDiscover()
+                        .movieList)
+            }
+            catch (e: Exception ) {
+                println(e.toString())
+            }
+            isLoading.value = false
+        }
+        return resultsDiscover
+    }
+
+    private fun getPage() : Int {
+        return if (page <= 100){
+            page++
+        } else {
+            page = 1
+            page
+        }
     }
 
     fun getDetail(id: Long): MovieDetailed {

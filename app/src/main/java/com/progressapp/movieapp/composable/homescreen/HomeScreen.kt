@@ -33,6 +33,7 @@ fun HomeScreen(
     val upComingItem = remember { vm.getUpcoming() }
     val topRatedItem = remember { vm.getTopRated() }
     val nowPlayingItem = remember { vm.getNowPlaying() }
+    val discoverItem = remember { vm.getDiscover() }
     val isLoading = remember { vm.isLoading }
 
 
@@ -123,8 +124,32 @@ fun HomeScreen(
                     }
                 }
             }
+
             item {
-                Text(text = "Now Playing",
+
+                Text(text = "Discover", fontSize = 28.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                LazyRow(modifier = Modifier.fillMaxWidth()){
+                    items(discoverItem){
+                        if (isLoading.value){
+                            ProgressIndicator()
+                        }
+                        else{
+                            AsyncImage(
+                                model = imageUrl + it.movieImage,
+                                contentDescription = "Movie item",
+                                modifier = Modifier
+                                    .size(width = 100.dp, height = 180.dp)
+                                    .clickable { imageClicked(it.MovieId.toInt()) }
+                            )
+                            Spacer(modifier = Modifier.size(6.dp))
+                        }
+                    }
+                }
+            }
+
+
+            item {
+                Text(text = "Now Playing on cinema",
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center)

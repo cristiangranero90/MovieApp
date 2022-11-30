@@ -1,5 +1,6 @@
 package com.progressapp.movieapp.composable.moviescreen.components
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -34,6 +35,7 @@ fun TopBarMovie(
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
+                modifier = Modifier.fillMaxWidth()
             )
         },
 

@@ -42,8 +42,8 @@ fun MainScreen(
 
         bottomBar =  { bottomNav() } ,
     ) {
-        padding ->
 
+        padding ->
 
         if (isLoading.value){
             ProgressIndicator(modifier = Modifier.padding(padding))
