@@ -59,7 +59,7 @@ fun Navigation(
         }
 
         composable("sample_screen"){
-            HomeScreen(vm = viewModelMain, bottomBar = bottomNav)
+            HomeScreen(vm = viewModelMain, bottomBar = bottomNav, { navController.navigate("movie_screen/$it")} )
         }
 
         composable(

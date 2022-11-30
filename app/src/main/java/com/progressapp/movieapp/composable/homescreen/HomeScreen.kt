@@ -1,5 +1,6 @@
 package com.progressapp.movieapp.composable.homescreen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -24,6 +25,7 @@ import com.progressapp.movieapp.ui.ViewModelMain
 fun HomeScreen(
     vm: ViewModelMain,
     bottomBar: @Composable () -> Unit,
+    imageClicked: (Int) -> Unit,
     imageUrl: String = "https://image.tmdb.org/t/p/w500",
     modifier: Modifier = Modifier
 ){
@@ -68,6 +70,7 @@ fun HomeScreen(
                                 contentDescription = "Movie item",
                                 modifier = Modifier
                                     .size(width = 150.dp, height = 250.dp)
+                                    .clickable { imageClicked(popularItem[it].MovieId.toInt()) }
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                         }
@@ -90,7 +93,9 @@ fun HomeScreen(
                             AsyncImage(
                                 model = imageUrl + it.movieImage,
                                 contentDescription = "Movie item",
-                                modifier = Modifier.size(width = 100.dp, height = 180.dp)
+                                modifier = Modifier
+                                    .size(width = 100.dp, height = 180.dp)
+                                    .clickable { imageClicked(it.MovieId.toInt()) }
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                         }
@@ -109,7 +114,9 @@ fun HomeScreen(
                             AsyncImage(
                                 model = imageUrl + it.movieImage,
                                 contentDescription = "Movie item",
-                                modifier = Modifier.size(width = 100.dp, height = 180.dp)
+                                modifier = Modifier
+                                    .size(width = 100.dp, height = 180.dp)
+                                    .clickable { imageClicked(it.MovieId.toInt()) }
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                         }
@@ -131,7 +138,9 @@ fun HomeScreen(
                             AsyncImage(
                                 model = imageUrl + it.movieImage,
                                 contentDescription = "Movie item",
-                                modifier = Modifier.size(width = 150.dp, height = 250.dp)
+                                modifier = Modifier
+                                    .size(width = 150.dp, height = 250.dp)
+                                    .clickable { imageClicked(it.MovieId.toInt()) }
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                         }
@@ -145,5 +154,5 @@ fun HomeScreen(
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview(){
-    HomeScreen(hiltViewModel(), {})
+    HomeScreen(hiltViewModel(), {}, {})
 }
