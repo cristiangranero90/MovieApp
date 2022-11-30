@@ -10,7 +10,6 @@ import com.progressapp.movieapp.repositories.MovieRepositoryImp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 
@@ -21,8 +20,10 @@ class ViewModelMain @Inject constructor(
 ) : ViewModel() {
 
     private var page = 1
-    private val _results = mutableStateListOf<MovieResponse>()
-    private val results = _results
+    private val _resultsPopular = mutableStateListOf<MovieResponse>()
+    private val resultsPopular = _resultsPopular
+    private val _resultsUpcoming = mutableStateListOf<MovieResponse>()
+    private val resultsUpcoming = _resultsUpcoming
     private var movieDetailed: MovieDetailed = getDetail(500)
     val isLoading = mutableStateOf(false)
     val barEnabled = mutableStateOf(true)
@@ -31,7 +32,7 @@ class ViewModelMain @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             isLoading.value = true
             try{
-                _results
+                _resultsPopular
                     .addAll(movieRepo
                     .getPopularMovies(
                         getPage().toString())
@@ -66,6 +67,23 @@ class ViewModelMain @Inject constructor(
         }
     }
 
+    fun getUpcoming() : MutableList<MovieResponse> {
+        viewModelScope.launch(Dispatchers.Main) {
+            isLoading.value = true
+            try{
+                _resultsUpcoming
+                    .addAll(movieRepo
+                        .getUpcoming()
+                        .movieList)
+            }
+            catch (e: Exception ) {
+                println(e.toString())
+            }
+            isLoading.value = false
+        }
+        return resultsUpcoming
+    }
+
     fun getDetail(id: Long): MovieDetailed {
         getMovieDetails(id)
         return movieDetailed
@@ -73,11 +91,11 @@ class ViewModelMain @Inject constructor(
 
     fun getMovieResults(): MutableList<MovieResponse> {
         getPopular()
-        return results
+        return resultsPopular
     }
 
     fun getResults() : MutableList<MovieResponse>{
-        return results
+        return resultsPopular
     }
 }
 

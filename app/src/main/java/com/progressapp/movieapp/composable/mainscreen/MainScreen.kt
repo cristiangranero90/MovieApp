@@ -60,12 +60,12 @@ fun MainScreen(
             ){
 
                 items(moviesList){
-                    if (!it.adultType){
+                    //if (!it.adultType){
                         MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
                             imageClicked = {
                                 imageClicked(moviesList.indexOf(it))
                             })
-                    }
+                    //}
                     if(moviesList.indexOf(it) == moviesList.size-1){
                         viewModelMain.getMovieResults()
                     }

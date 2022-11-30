@@ -13,4 +13,6 @@ interface MovieRepository {
 
     suspend fun getDetailedMovie(id: Long) : MovieDetailed
 
+    suspend fun getUpcoming() : MovieList
+
 }

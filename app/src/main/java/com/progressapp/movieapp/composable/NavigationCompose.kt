@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.progressapp.movieapp.composable.homescreen.HomeScreen
 import com.progressapp.movieapp.composable.mainscreen.MainScreen
 import com.progressapp.movieapp.composable.mainscreen.components.BottomBar
 import com.progressapp.movieapp.composable.moviescreen.MovieScreen
@@ -29,17 +30,15 @@ fun Navigation(
         BottomBar(
             currentDestination,
             onHomeClicked = { navController.navigate("home_screen") {
-                popUpTo("home_screen") {
-                    saveState = true
-                }
+                popUpTo("home_screen")
                     launchSingleTop = true
                     restoreState = true }
             },
             onMovieClicked = {
                 navController.navigate("sample_screen") {
+                    popUpTo("sample_screen")
                     launchSingleTop = true
-                    restoreState = true
-                    }
+                    restoreState = true }
             },
             onFavoritesClicked = { /*TODO*/ },
             onSearchClicked = { /*TODO*/ })
@@ -60,7 +59,7 @@ fun Navigation(
         }
 
         composable("sample_screen"){
-            Sample()
+            HomeScreen(vm = viewModelMain, bottomBar = bottomNav)
         }
 
         composable(

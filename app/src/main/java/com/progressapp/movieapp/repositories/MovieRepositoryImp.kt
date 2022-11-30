@@ -50,5 +50,17 @@ class MovieRepositoryImp @Inject constructor(
         }
     }
 
+    override suspend fun getUpcoming(): MovieList {
+
+        val response : Response<MovieList> = dataSource.getUpcoming(lang)
+
+        if (response.isSuccessful){
+            return response.body()!!
+        }
+        else{
+            throw RuntimeException("Movie list empty, an error occured")
+        }
+    }
+
 
 }

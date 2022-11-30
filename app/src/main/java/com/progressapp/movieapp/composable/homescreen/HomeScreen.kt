@@ -1,0 +1,175 @@
+package com.progressapp.movieapp.composable.homescreen
+
+import android.view.View
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
+import com.progressapp.movieapp.composable.ProgressIndicator
+import com.progressapp.movieapp.composable.mainscreen.components.TopBar
+import com.progressapp.movieapp.ui.ViewModelMain
+
+@Composable
+fun HomeScreen(
+    vm: ViewModelMain,
+    bottomBar: @Composable () -> Unit,
+    imageUrl: String = "https://image.tmdb.org/t/p/w500",
+    modifier: Modifier = Modifier
+){
+    val popularItem = remember { vm.getMovieResults() }
+    val upComingItem = remember { vm.getUpcoming() }
+    val isLoading = remember { vm.isLoading }
+
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = { TopBar(onListClicked = { /*TODO*/ }, onAccountClicked = { /*TODO*/ }) },
+        bottomBar = { bottomBar() },
+
+    ) { paddingValues ->
+
+        LazyColumn(
+            modifier = Modifier
+                .padding(
+                    start = 2.dp,
+                    end = 2.dp,
+                    top = paddingValues.calculateTopPadding(),
+                    bottom = paddingValues.calculateBottomPadding()),
+
+        ){
+
+            item {
+                if (isLoading.value){
+                    ProgressIndicator()
+                }
+                else{
+                    Text(text = "Popular movies",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center)
+                    //Spacer(modifier = Modifier.size(10.dp))
+                    LazyRow(modifier = Modifier.fillMaxWidth()){
+                        items(10){
+                            AsyncImage(
+                                model = imageUrl + popularItem[it].movieImage,
+                                contentDescription = "Movie item",
+                                modifier = Modifier.size(width = 150.dp, height = 250.dp)
+                            )
+                            Spacer(modifier = Modifier.size(2.dp))
+                        }
+                    }
+                }
+            }
+            item {
+                Text(text = "Upcoming", fontSize = 24.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+
+                LazyRow(modifier = Modifier.fillMaxWidth()){
+                    items(upComingItem){
+                        if (isLoading.value){
+                            ProgressIndicator()
+                        }
+                        else{
+                            AsyncImage(
+                                model = imageUrl + it.movieImage,
+                                contentDescription = "Movie item",
+                                modifier = Modifier.size(width = 80.dp, height = 150.dp)
+                            )
+                            Spacer(modifier = Modifier.size(2.dp))
+                        }
+                    }
+                }
+            }
+
+            item {
+
+                if (isLoading.value){
+                    ProgressIndicator()
+                }
+                else{
+                    Text(text = "Latest added", fontSize = 24.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                    //Spacer(modifier = Modifier.size(10.dp))
+                    LazyRow(modifier = Modifier.fillMaxWidth()){
+                        items(10){
+                            AsyncImage(
+                                model = imageUrl + popularItem[it + 20].movieImage,
+                                contentDescription = "Movie item",
+                                modifier = Modifier.size(width = 80.dp, height = 150.dp)
+                            )
+                            Spacer(modifier = Modifier.size(2.dp))
+                        }
+                    }
+                }
+            }
+
+            item{
+                Text(text = "Top Rated", fontSize = 24.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                Column(modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.SpaceAround,
+                horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+
+                    Row(modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+
+                        AsyncImage(
+                            model = imageUrl + popularItem[0].movieImage,
+                            contentDescription = "Movie item",
+                            modifier = Modifier.size(width = 150.dp, height = 250.dp)
+                        )
+                        Spacer(modifier = Modifier.size(2.dp))
+
+                        AsyncImage(
+                            model = imageUrl + popularItem[1].movieImage,
+                            contentDescription = "Movie item",
+                            modifier = Modifier.size(width = 150.dp, height = 250.dp)
+                        )
+                        Spacer(modifier = Modifier.size(2.dp))
+                    }
+
+                    Row(modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        AsyncImage(
+                            model = imageUrl + popularItem[2].movieImage,
+                            contentDescription = "Movie item",
+                            modifier = Modifier.size(width = 150.dp, height = 250.dp)
+                        )
+                        Spacer(modifier = Modifier.size(2.dp))
+
+                        AsyncImage(
+                            model = imageUrl + popularItem[3].movieImage,
+                            contentDescription = "Movie item",
+                            modifier = Modifier.size(width = 150.dp, height = 250.dp)
+                        )
+                        Spacer(modifier = Modifier.size(2.dp))
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview(){
+    HomeScreen(hiltViewModel(), {})
+}
