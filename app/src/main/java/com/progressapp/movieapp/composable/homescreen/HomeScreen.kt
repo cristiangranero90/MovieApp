@@ -126,7 +126,6 @@ fun HomeScreen(
             }
 
             item {
-
                 Text(text = "Discover", fontSize = 28.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
                 LazyRow(modifier = Modifier.fillMaxWidth()){
                     items(discoverItem){
@@ -146,7 +145,6 @@ fun HomeScreen(
                     }
                 }
             }
-
 
             item {
                 Text(text = "Now Playing on cinema",
