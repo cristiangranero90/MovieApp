@@ -15,4 +15,6 @@ interface MovieRepository {
 
     suspend fun getUpcoming() : MovieList
 
+    suspend fun getTopRated() : MovieList
+
 }

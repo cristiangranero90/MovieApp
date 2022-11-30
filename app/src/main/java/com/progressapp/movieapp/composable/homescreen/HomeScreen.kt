@@ -34,6 +34,7 @@ fun HomeScreen(
 ){
     val popularItem = remember { vm.getMovieResults() }
     val upComingItem = remember { vm.getUpcoming() }
+    val topRatedItem = remember { vm.getTopRated() }
     val isLoading = remember { vm.isLoading }
 
 
@@ -60,7 +61,7 @@ fun HomeScreen(
                 }
                 else{
                     Text(text = "Popular movies",
-                        fontSize = 24.sp,
+                        fontSize = 28.sp,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center)
                     //Spacer(modifier = Modifier.size(10.dp))
@@ -71,13 +72,13 @@ fun HomeScreen(
                                 contentDescription = "Movie item",
                                 modifier = Modifier.size(width = 150.dp, height = 250.dp)
                             )
-                            Spacer(modifier = Modifier.size(2.dp))
+                            Spacer(modifier = Modifier.size(6.dp))
                         }
                     }
                 }
             }
             item {
-                Text(text = "Upcoming", fontSize = 24.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                Text(text = "Upcoming", fontSize = 28.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
 
                 LazyRow(modifier = Modifier.fillMaxWidth()){
                     items(upComingItem){
@@ -88,79 +89,29 @@ fun HomeScreen(
                             AsyncImage(
                                 model = imageUrl + it.movieImage,
                                 contentDescription = "Movie item",
-                                modifier = Modifier.size(width = 80.dp, height = 150.dp)
+                                modifier = Modifier.size(width = 100.dp, height = 180.dp)
                             )
-                            Spacer(modifier = Modifier.size(2.dp))
+                            Spacer(modifier = Modifier.size(6.dp))
                         }
                     }
                 }
             }
 
             item {
-
-                if (isLoading.value){
-                    ProgressIndicator()
-                }
-                else{
-                    Text(text = "Latest added", fontSize = 24.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-                    //Spacer(modifier = Modifier.size(10.dp))
-                    LazyRow(modifier = Modifier.fillMaxWidth()){
-                        items(10){
-                            AsyncImage(
-                                model = imageUrl + popularItem[it + 20].movieImage,
-                                contentDescription = "Movie item",
-                                modifier = Modifier.size(width = 80.dp, height = 150.dp)
-                            )
-                            Spacer(modifier = Modifier.size(2.dp))
+                Text(text = "Top Rated", fontSize = 28.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                LazyRow(modifier = Modifier.fillMaxWidth()){
+                    items(topRatedItem){
+                        if (isLoading.value){
+                            ProgressIndicator()
                         }
-                    }
-                }
-            }
-
-            item{
-                Text(text = "Top Rated", fontSize = 24.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-                Column(modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.SpaceAround,
-                horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-
-                    Row(modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-
-                        AsyncImage(
-                            model = imageUrl + popularItem[0].movieImage,
-                            contentDescription = "Movie item",
-                            modifier = Modifier.size(width = 150.dp, height = 250.dp)
-                        )
-                        Spacer(modifier = Modifier.size(2.dp))
-
-                        AsyncImage(
-                            model = imageUrl + popularItem[1].movieImage,
-                            contentDescription = "Movie item",
-                            modifier = Modifier.size(width = 150.dp, height = 250.dp)
-                        )
-                        Spacer(modifier = Modifier.size(2.dp))
-                    }
-
-                    Row(modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        AsyncImage(
-                            model = imageUrl + popularItem[2].movieImage,
-                            contentDescription = "Movie item",
-                            modifier = Modifier.size(width = 150.dp, height = 250.dp)
-                        )
-                        Spacer(modifier = Modifier.size(2.dp))
-
-                        AsyncImage(
-                            model = imageUrl + popularItem[3].movieImage,
-                            contentDescription = "Movie item",
-                            modifier = Modifier.size(width = 150.dp, height = 250.dp)
-                        )
-                        Spacer(modifier = Modifier.size(2.dp))
+                        else{
+                            AsyncImage(
+                                model = imageUrl + it.movieImage,
+                                contentDescription = "Movie item",
+                                modifier = Modifier.size(width = 100.dp, height = 180.dp)
+                            )
+                            Spacer(modifier = Modifier.size(6.dp))
+                        }
                     }
                 }
             }
