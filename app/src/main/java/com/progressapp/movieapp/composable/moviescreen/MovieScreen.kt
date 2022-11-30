@@ -41,10 +41,10 @@ fun MovieScreen(
     modifier: Modifier = Modifier
 
 ){
-    val movieSelected = vm.getResults()[selected]
+    //val movieSelected = vm.getResults()[selected]
     val scaffoldState = rememberScaffoldState()
     val isLoading = remember { vm.isLoading }
-    val movieDetails = vm.getDetail(movieSelected.MovieId)
+    val movieDetails = vm.getDetail(selected.toLong())
     var showDialog by remember { mutableStateOf(false) }
     var vote by remember { mutableStateOf(0.0) }
 
@@ -77,24 +77,27 @@ fun MovieScreen(
             onButtonDismis = { showDialog = false },
             show = showDialog)
 
-        if (isLoading.value) {
-            ProgressIndicator(modifier = Modifier.padding(padding))
-        }
-        else{
-            LazyColumn(
-                modifier = Modifier
-                    .padding(padding)
-                    .fillMaxSize(),
-                userScrollEnabled = true,
-                contentPadding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 45.dp)
-
+        LazyColumn(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize(),
+                contentPadding = padding
             ) {
 
-                item {
+            item {
+                if (isLoading.value){
+                    ProgressIndicator()
+                }
+                else{
                     ImageView(imageUrl, movieDetails)
                 }
+            }
 
-                item {
+            item {
+                if (isLoading.value){
+                    ProgressIndicator()
+                }
+                else{
                     InformationView(movieDetails) { showDialog = true }
                 }
             }

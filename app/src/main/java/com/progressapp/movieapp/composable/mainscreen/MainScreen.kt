@@ -63,7 +63,7 @@ fun MainScreen(
                     //if (!it.adultType){
                         MovieItemView(imageUrl = BASE_IMAGE_URL + it.movieImage,
                             imageClicked = {
-                                imageClicked(moviesList.indexOf(it))
+                                imageClicked(it.MovieId.toInt())
                             })
                     //}
                     if(moviesList.indexOf(it) == moviesList.size-1){

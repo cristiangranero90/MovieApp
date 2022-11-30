@@ -66,7 +66,8 @@ fun HomeScreen(
                             AsyncImage(
                                 model = imageUrl + popularItem[it].movieImage,
                                 contentDescription = "Movie item",
-                                modifier = Modifier.size(width = 150.dp, height = 250.dp)
+                                modifier = Modifier
+                                    .size(width = 150.dp, height = 250.dp)
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                         }
