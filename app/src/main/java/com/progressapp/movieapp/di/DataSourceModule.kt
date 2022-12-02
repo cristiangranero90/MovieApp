@@ -1,10 +1,14 @@
 package com.progressapp.movieapp.di
 
+import android.content.Context
+import androidx.room.Room
+import com.progressapp.movieapp.dao.MovieDao
+import com.progressapp.movieapp.data.DbDataSource
 import com.progressapp.movieapp.data.RestDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -37,5 +41,17 @@ object DataSourceModule {
     @Singleton
     fun restDataSource(retrofit: Retrofit) : RestDataSource =
         retrofit.create(RestDataSource::class.java)
+
+    @Provides
+    @Singleton
+    fun dbDataSource(@ApplicationContext context: Context) : DbDataSource{
+        return Room.databaseBuilder(context, DbDataSource::class.java, "user_movies")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun movieDao(db: DbDataSource) : MovieDao = db.movieDao()
 
 }

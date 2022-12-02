@@ -1,9 +1,9 @@
 package com.progressapp.movieapp.repositories
 
+import com.progressapp.movieapp.model.Movie
 import com.progressapp.movieapp.model.MovieDetailed
 import com.progressapp.movieapp.model.MovieList
 import com.progressapp.movieapp.model.MovieResponse
-import retrofit2.Response
 
 interface MovieRepository {
 
@@ -20,5 +20,13 @@ interface MovieRepository {
     suspend fun getNowPlaying() : MovieList
 
     suspend fun getDiscover() : MovieList
+
+    suspend fun addToFavourites(movie: MovieDetailed) : Long
+
+    suspend fun deleteMovie(toDelete: Movie)
+
+    suspend fun updateMovie(toUpdate: Movie)
+
+    suspend fun getAllMovies() : MutableList<Movie>
 
 }
