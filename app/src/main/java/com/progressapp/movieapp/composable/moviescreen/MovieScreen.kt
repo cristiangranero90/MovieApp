@@ -29,6 +29,7 @@ import com.progressapp.movieapp.composable.moviescreen.components.RowText
 import com.progressapp.movieapp.composable.moviescreen.components.TopBarMovie
 import com.progressapp.movieapp.model.MovieDetailed
 import com.progressapp.movieapp.ui.ViewModelMain
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 @Composable
 fun MovieScreen(
@@ -52,7 +53,7 @@ fun MovieScreen(
         modifier = Modifier,
 
         floatingActionButton = {
-            FloatingActionButton(onClick = { println("something: " ) }) {
+            FloatingActionButton(onClick = { vm.addFavourite(movieDetails) }) {
                 Icon(imageVector = Icons.Default.Favorite, contentDescription = "Add to favourites", tint = Color.Red)
             }
         },

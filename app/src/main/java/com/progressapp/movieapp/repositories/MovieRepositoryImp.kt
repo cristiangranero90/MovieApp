@@ -102,11 +102,20 @@ class MovieRepositoryImp @Inject constructor(
     }
 
     //Database methods
-    override suspend fun addToFavourites(movie: MovieDetailed): Long {
-        return movieDao
-            .addMovie(Movie(title = movie.title,
-                poster_path = movie.poster_path,
-                idtmdb = movie.id))
+    override suspend fun addToFavourites(movie: MovieDetailed) : Boolean {
+        val aux = movieDao.getAllMovies()
+        var contains = false
+        for (it: Movie in aux){
+            contains = contains || it.title == movie.title
+        }
+        if (!contains) {
+            movieDao
+                .addMovie(Movie(
+                    title = movie.title,
+                    poster_path = movie.poster_path,
+                    idtmdb = movie.id))
+        }
+        return !contains
     }
 
     override suspend fun deleteMovie(toDelete: Movie) {
@@ -120,6 +129,5 @@ class MovieRepositoryImp @Inject constructor(
     override suspend fun getAllMovies(): MutableList<Movie> {
         return movieDao.getAllMovies()
     }
-
 
 }

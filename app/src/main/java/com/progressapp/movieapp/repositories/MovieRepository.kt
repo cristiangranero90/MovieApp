@@ -21,7 +21,7 @@ interface MovieRepository {
 
     suspend fun getDiscover() : MovieList
 
-    suspend fun addToFavourites(movie: MovieDetailed) : Long
+    suspend fun addToFavourites(movie: MovieDetailed) : Boolean
 
     suspend fun deleteMovie(toDelete: Movie)
 

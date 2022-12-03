@@ -7,35 +7,39 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.progressapp.movieapp.model.Movie
 import com.progressapp.movieapp.repositories.MovieRepositoryImp
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ViewModelFavourites @Inject constructor(
     private val movieRepo : MovieRepositoryImp
 ) : ViewModel(){
 
     private val _isLoading = mutableStateOf(false)
     private val _allFavourites = mutableStateListOf<Movie>()
-    val allFavourites = _allFavourites
+    val allFavourites: List<Movie> = _allFavourites
 
     fun isLoading() = _isLoading.value
 
-    private fun getAll(): SnapshotStateList<Movie> {
+    fun getAll(){
         _isLoading.value = true
         viewModelScope.launch(Dispatchers.Main) {
             _allFavourites.addAll(0, movieRepo.getAllMovies())
             _isLoading.value = false
         }
-        return allFavourites
     }
 
-    private suspend fun addFavourite(id: Int){
+
+    private suspend fun addFavourite(id: Int) : Boolean {
         _isLoading.value = true
+        var ready = false
         viewModelScope.launch(Dispatchers.IO) {
-            movieRepo.addToFavourites(movieRepo.getDetailedMovie(id.toLong()))
+            ready = movieRepo.addToFavourites(movieRepo.getDetailedMovie(id.toLong()))
             _isLoading.value = false
         }
+        return ready
     }
 
 }

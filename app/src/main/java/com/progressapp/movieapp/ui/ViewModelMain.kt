@@ -31,6 +31,12 @@ class ViewModelMain @Inject constructor(
     private var page = 1
     val isLoading = mutableStateOf(false)
 
+    fun addFavourite(movieDetailed: MovieDetailed)  {
+        viewModelScope.launch(Dispatchers.Main) {
+            movieRepo.addToFavourites(movieDetailed)
+        }
+    }
+
     private fun getPopular()  {
         viewModelScope.launch(Dispatchers.IO) {
             isLoading.value = true

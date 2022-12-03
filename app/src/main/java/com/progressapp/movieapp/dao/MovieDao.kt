@@ -15,11 +15,12 @@ interface MovieDao {
     suspend fun getAllMovies() : MutableList<Movie>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addMovie(toAdd: Movie) : Long
+    suspend fun addMovie(toAdd: Movie)
 
     @Update
     suspend fun updateMovie(toUpdate: Movie)
 
     @Delete
     suspend fun deleteMovie(toDelete: Movie)
+
 }

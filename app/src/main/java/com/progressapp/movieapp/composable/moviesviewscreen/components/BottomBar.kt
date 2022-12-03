@@ -49,9 +49,8 @@ fun BottomBar(
         BottomNavigationItem(
             icon = { Icon(imageVector = Icons.Default.Star, contentDescription = "Favorites") },
             label = { Text(text = "Favourites")},
-            selected = (selectedItem.value == 2),
+            selected = currentDestination?.hierarchy?.any { it.route == "favourites_screen" } == true,
             onClick = {
-                selectedItem.value = 2
                 onFavoritesClicked()
             }
         )
