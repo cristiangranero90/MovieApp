@@ -2,7 +2,6 @@ package com.progressapp.movieapp.ui
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.progressapp.movieapp.model.Movie
@@ -19,7 +18,7 @@ class ViewModelFavourites @Inject constructor(
 
     private val _isLoading = mutableStateOf(false)
     private val _allFavourites = mutableStateListOf<Movie>()
-    val allFavourites: List<Movie> = _allFavourites
+    val allFavourites = _allFavourites
 
     fun isLoading() = _isLoading.value
 
@@ -31,6 +30,14 @@ class ViewModelFavourites @Inject constructor(
         }
     }
 
+    fun deleteMovie(movie: Movie){
+        _isLoading.value = true
+        viewModelScope.launch(Dispatchers.Main) {
+            movieRepo.deleteMovie(movie)
+            allFavourites.remove(movie)
+            _isLoading.value = false
+        }
+    }
 
     private suspend fun addFavourite(id: Int) : Boolean {
         _isLoading.value = true
