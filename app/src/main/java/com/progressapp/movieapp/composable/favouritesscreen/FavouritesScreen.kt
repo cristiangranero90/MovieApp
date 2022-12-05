@@ -32,7 +32,6 @@ fun FavouritesScreen(
 
     if (vm.isLoading()){
         ProgressIndicator()
-        println(favourites.size)
     }
     if(favourites.isEmpty()){
         MovieEmpty()

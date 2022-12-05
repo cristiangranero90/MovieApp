@@ -83,7 +83,6 @@ fun Navigation(
             backStackEntry ->
             MovieScreen(
                 bottomNav,
-                viewModelMain,
                 selected = backStackEntry.arguments!!.getInt("id"),
                 backClicked = { navController.navigateUp() },
                 accountCliked = { /*TODO*/ })
