@@ -23,8 +23,8 @@ import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
 fun HomeScreen(
-    vm: ViewModelMain,
     bottomBar: @Composable () -> Unit,
+    vm: ViewModelMain,
     imageClicked: (Int) -> Unit,
     imageUrl: String = "https://image.tmdb.org/t/p/w500",
     modifier: Modifier = Modifier
@@ -177,5 +177,5 @@ fun HomeScreen(
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview(){
-    HomeScreen(hiltViewModel(), {}, {})
+    //HomeScreen(hiltViewModel(), {}, {})
 }

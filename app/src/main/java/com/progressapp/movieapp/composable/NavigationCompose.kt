@@ -59,14 +59,19 @@ fun Navigation(
         }
 
         composable("home_screen") {
-            HomeScreen(vm = viewModelMain, bottomBar = bottomNav, { navController.navigate("movie_screen/$it")} )
-
+            HomeScreen(
+                bottomBar = bottomNav,
+                viewModelMain,
+                { navController.navigate("movie_screen/$it")}
+            )
         }
 
         composable("movies_view_screen"){
-            MoviesViewScreen(  bottomNav,
-                viewModelMain,
-                { navController.navigate("movie_screen/$it")} )
+            MoviesViewScreen(
+                bottomNav,
+
+                { navController.navigate("movie_screen/$it")}
+            )
         }
 
         composable("favourites_screen"){
