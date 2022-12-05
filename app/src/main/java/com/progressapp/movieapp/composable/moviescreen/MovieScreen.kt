@@ -1,6 +1,7 @@
 package com.progressapp.movieapp.composable.moviescreen
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.ClickableText
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -47,13 +49,18 @@ fun MovieScreen(
     val movieDetails = vm.getDetail(selected.toLong())
     var showDialog by remember { mutableStateOf(false) }
     var vote by remember { mutableStateOf(0.0) }
+    val context = LocalContext.current
 
     Scaffold(
         scaffoldState = scaffoldState,
         modifier = Modifier,
 
         floatingActionButton = {
-            FloatingActionButton(onClick = { vm.addFavourite(movieDetails) }) {
+            FloatingActionButton(
+                onClick = {
+                    vm.addFavourite(movieDetails)
+                    Toast.makeText(context,"Added to favourites", Toast.LENGTH_SHORT ).show()
+                }) {
                 Icon(imageVector = Icons.Default.Favorite, contentDescription = "Add to favourites", tint = Color.Red)
             }
         },

@@ -15,7 +15,6 @@ import com.progressapp.movieapp.composable.ProgressIndicator
 import com.progressapp.movieapp.composable.favouritesscreen.components.MovieEmpty
 import com.progressapp.movieapp.composable.favouritesscreen.components.MovieView
 import com.progressapp.movieapp.composable.favouritesscreen.components.TopBarFavourites
-import com.progressapp.movieapp.composable.moviescreen.components.TopBarMovie
 import com.progressapp.movieapp.ui.ViewModelFavourites
 
 @Composable
