@@ -24,11 +24,12 @@ import com.progressapp.movieapp.ui.ViewModelMain
 @Composable
 fun HomeScreen(
     bottomBar: @Composable () -> Unit,
-    vm: ViewModelMain,
     imageClicked: (Int) -> Unit,
+    vm: ViewModelMain = hiltViewModel(),
     imageUrl: String = "https://image.tmdb.org/t/p/w500",
     modifier: Modifier = Modifier
 ){
+
     val popularItem = remember { vm.getMovieResults() }
     val upComingItem = remember { vm.getUpcoming() }
     val topRatedItem = remember { vm.getTopRated() }

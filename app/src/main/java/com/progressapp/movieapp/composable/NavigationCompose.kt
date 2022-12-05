@@ -23,7 +23,6 @@ fun Navigation(
 
 ) {
     val navController = rememberNavController()
-    val viewModelMain = hiltViewModel<ViewModelMain>()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val bottomNav: @Composable () -> Unit = {
@@ -61,7 +60,6 @@ fun Navigation(
         composable("home_screen") {
             HomeScreen(
                 bottomBar = bottomNav,
-                viewModelMain,
                 { navController.navigate("movie_screen/$it")}
             )
         }
@@ -69,7 +67,6 @@ fun Navigation(
         composable("movies_view_screen"){
             MoviesViewScreen(
                 bottomNav,
-
                 { navController.navigate("movie_screen/$it")}
             )
         }
