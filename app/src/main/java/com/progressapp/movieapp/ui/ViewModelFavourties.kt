@@ -39,7 +39,7 @@ class ViewModelFavourites @Inject constructor(
         }
     }
 
-    private suspend fun addFavourite(id: Int) : Boolean {
+    private fun addFavourite(id: Int) : Boolean {
         _isLoading.value = true
         var ready = false
         viewModelScope.launch(Dispatchers.IO) {

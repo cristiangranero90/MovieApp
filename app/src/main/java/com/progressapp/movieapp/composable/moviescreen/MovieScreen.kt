@@ -22,7 +22,7 @@ fun MovieScreen(
     bottomNav: @Composable () -> Unit,
     selected: Int,
     backClicked: () -> Unit,
-    accountCliked: () -> Unit,
+    accountClicked: () -> Unit,
     vm: ViewModelMovies = hiltViewModel(),
     imageUrl: String = "https://image.tmdb.org/t/p/w500",
     modifier: Modifier = Modifier
@@ -30,15 +30,12 @@ fun MovieScreen(
 ){
     val scaffoldState = rememberScaffoldState()
     val isLoading = remember { vm.isLoading() }
-    val movieDetails = vm.getDetail(selected.toLong())
+    val movieDetails = remember { vm.getDetail(selected.toLong()) }
     var showDialog by remember { mutableStateOf(false) }
     var vote by remember { mutableStateOf(0.0) }
     val context = LocalContext.current
 
-    if (isLoading){
-        ProgressIndicator()
-    }
-    else if(movieDetails == null){
+    if (isLoading || movieDetails.isEmpty()){
         ProgressIndicator()
     }
     else{
@@ -49,7 +46,7 @@ fun MovieScreen(
             floatingActionButton = {
                 FloatingActionButton(
                     onClick = {
-                        vm.addFavourite(movieDetails)
+                        vm.addFavourite(movieDetails.last())
                         Toast.makeText(context,"Added to favourites", Toast.LENGTH_SHORT ).show()
                     }) {
                     Icon(imageVector = Icons.Default.Favorite, contentDescription = "Add to favourites", tint = Color.Red)
@@ -60,9 +57,9 @@ fun MovieScreen(
 
             topBar = {
                 TopBarMovie(
-                    movieTitle = movieDetails.title,
+                    movieTitle = movieDetails.last().title,
                     onBackClcked = backClicked,
-                    onProfileClicked = accountCliked)
+                    onProfileClicked = accountClicked)
             },
             bottomBar = { bottomNav () }
 
@@ -88,11 +85,11 @@ fun MovieScreen(
             ) {
 
                 item {
-                    ImageView(imageUrl, movieDetails)
+                    ImageView(imageUrl, movieDetails.last())
                 }
 
                 item {
-                    InformationView(movieDetails) { showDialog = true }
+                    InformationView(movieDetails.last()) { showDialog = true }
                 }
             }
         }
