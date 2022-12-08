@@ -1,4 +1,4 @@
-package com.progressapp.movieapp.composable.moviesviewscreen.components
+package com.progressapp.movieapp.composable.homescreen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

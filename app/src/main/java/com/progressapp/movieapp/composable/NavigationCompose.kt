@@ -71,7 +71,8 @@ fun Navigation(
         composable("movies_view_screen"){
             MoviesViewScreen(
                 bottomNav,
-                { navController.navigate("movie_screen/$it")}
+                { navController.navigate("movie_screen/$it")},
+                { navController.navigateUp() }
             )
         }
 

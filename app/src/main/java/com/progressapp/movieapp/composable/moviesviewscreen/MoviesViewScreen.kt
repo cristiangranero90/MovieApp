@@ -15,13 +15,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.progressapp.movieapp.composable.ProgressIndicator
 import com.progressapp.movieapp.composable.moviesviewscreen.components.MovieItemView
-import com.progressapp.movieapp.composable.moviesviewscreen.components.TopBar
+import com.progressapp.movieapp.composable.moviesviewscreen.components.TopBarMtv
 import com.progressapp.movieapp.ui.ViewModelAll
 
 @Composable
 fun MoviesViewScreen(
     bottomNav: @Composable () -> Unit,
     imageClicked: (Int) -> Unit,
+    onBackClicked: () -> Unit,
     vm: ViewModelAll = hiltViewModel(),
     BASE_IMAGE_URL: String = "https://image.tmdb.org/t/p/w500",
     modifier: Modifier = Modifier
@@ -41,9 +42,9 @@ fun MoviesViewScreen(
         modifier = Modifier.fillMaxSize(),
 
         topBar = {
-            TopBar(
-                onListClicked = { /*TODO*/ },
-                onAccountClicked = { /*TODO*/ })
+            TopBarMtv {
+                onBackClicked()
+            }
         },
 
         bottomBar =  { bottomNav() } ,

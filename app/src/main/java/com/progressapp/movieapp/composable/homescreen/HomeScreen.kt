@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.progressapp.movieapp.composable.ProgressIndicator
-import com.progressapp.movieapp.composable.moviesviewscreen.components.TopBar
+import com.progressapp.movieapp.composable.homescreen.components.TopBar
 import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
