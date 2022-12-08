@@ -2,7 +2,6 @@ package com.progressapp.movieapp.composable
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
 
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -15,8 +14,8 @@ import com.progressapp.movieapp.composable.homescreen.HomeScreen
 import com.progressapp.movieapp.composable.moviesviewscreen.MoviesViewScreen
 import com.progressapp.movieapp.composable.moviesviewscreen.components.BottomBar
 import com.progressapp.movieapp.composable.moviescreen.MovieScreen
+import com.progressapp.movieapp.composable.searchscreen.SearchScreen
 import com.progressapp.movieapp.composable.splashscreen.SplashScreen
-import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
 fun Navigation(
@@ -47,7 +46,12 @@ fun Navigation(
                     restoreState = true
                 }
             },
-            onSearchClicked = { /*TODO*/ })
+            onSearchClicked = {
+                navController.navigate("search_screen") {
+                launchSingleTop = true
+                restoreState = true
+                }
+            })
     }
 
 
@@ -78,6 +82,14 @@ fun Navigation(
                 { navController.navigate("movie_screen/$it") })
         }
 
+        composable("search_screen"){
+            SearchScreen(
+                bottomNav,
+                onBackClicked = { navController.navigateUp() },
+                { navController.navigate("movie_screen/$it") }
+                )
+        }
+
         composable(
             "movie_screen/{id}",
             arguments = listOf(navArgument("id") { type = NavType.IntType} )
@@ -87,7 +99,7 @@ fun Navigation(
                 bottomNav,
                 selected = backStackEntry.arguments!!.getInt("id"),
                 backClicked = { navController.navigateUp() },
-                accountCliked = { /*TODO*/ })
+                accountClicked = { /*TODO*/ })
 
         }
     }

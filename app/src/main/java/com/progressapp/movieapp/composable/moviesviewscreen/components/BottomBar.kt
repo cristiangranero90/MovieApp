@@ -58,9 +58,8 @@ fun BottomBar(
         BottomNavigationItem(
             icon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Search movie") },
             label = { Text(text = "Search")},
-            selected = (selectedItem.value == 3),
+            selected = currentDestination?.hierarchy?.any { it.route == "search_screen" } == true,
             onClick = {
-                selectedItem.value = 3
                 onSearchClicked()
             }
         )

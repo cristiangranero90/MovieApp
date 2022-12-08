@@ -21,6 +21,8 @@ interface MovieRepository {
 
     suspend fun getDiscover() : MovieList
 
+    suspend fun searchMovie(toSearch: String) : MovieList
+
     suspend fun addToFavourites(movie: MovieDetailed) : Boolean
 
     suspend fun deleteMovie(toDelete: Movie)
@@ -28,5 +30,7 @@ interface MovieRepository {
     suspend fun updateMovie(toUpdate: Movie)
 
     suspend fun getAllMovies() : MutableList<Movie>
+
+
 
 }

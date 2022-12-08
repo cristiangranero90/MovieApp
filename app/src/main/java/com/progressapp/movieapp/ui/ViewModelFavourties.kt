@@ -24,7 +24,7 @@ class ViewModelFavourites @Inject constructor(
 
     fun getAll(){
         _isLoading.value = true
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.IO) {
             _allFavourites.addAll(0, movieRepo.getAllMovies())
             _isLoading.value = false
         }
@@ -32,7 +32,7 @@ class ViewModelFavourites @Inject constructor(
 
     fun deleteMovie(movie: Movie){
         _isLoading.value = true
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.IO) {
             movieRepo.deleteMovie(movie)
             allFavourites.remove(movie)
             _isLoading.value = false

@@ -101,6 +101,18 @@ class MovieRepositoryImp @Inject constructor(
         }
     }
 
+    override suspend fun searchMovie(toSearch: String): MovieList {
+
+        val response: Response<MovieList> = dataSource.searchMovie(lang, toSearch)
+
+        if (response.isSuccessful){
+            return response.body()!!
+        }
+        else{
+            throw RuntimeException("We cant find the movie. No match...")
+        }
+    }
+
     //Database methods
     override suspend fun addToFavourites(movie: MovieDetailed) : Boolean {
         val aux = movieDao.getAllMovies()
@@ -129,5 +141,7 @@ class MovieRepositoryImp @Inject constructor(
     override suspend fun getAllMovies(): MutableList<Movie> {
         return movieDao.getAllMovies()
     }
+
+
 
 }

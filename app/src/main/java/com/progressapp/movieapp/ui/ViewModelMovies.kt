@@ -23,14 +23,14 @@ class ViewModelMovies @Inject constructor(
     fun isLoading() = _isLoading.value
 
     fun addFavourite(movieDetailed: MovieDetailed)  {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.IO) {
             movieRepo.addToFavourites(movieDetailed)
         }
     }
 
     private fun getMovieDetails(id: Long) {
         _isLoading.value = true
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 movieDetailed.add(movieRepo.getDetailedMovie(id))
             }

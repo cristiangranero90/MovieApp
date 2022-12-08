@@ -48,7 +48,7 @@ class ViewModelMain @Inject constructor(
     fun getUpcoming() : MutableList<MovieResponse> {
         if(resultsUpcoming.isEmpty()){
             isLoading.value = true
-            viewModelScope.launch(Dispatchers.Main) {
+            viewModelScope.launch(Dispatchers.IO) {
                 try{
                     _resultsUpcoming
                         .addAll(movieRepo
@@ -67,7 +67,7 @@ class ViewModelMain @Inject constructor(
     fun getTopRated() : MutableList<MovieResponse> {
         if(resultsTopRated.isEmpty()){
             isLoading.value = true
-            viewModelScope.launch(Dispatchers.Main) {
+            viewModelScope.launch(Dispatchers.IO) {
                 try{
                     _resultsTopRated
                         .addAll(movieRepo
@@ -86,7 +86,7 @@ class ViewModelMain @Inject constructor(
     fun getNowPlaying() : MutableList<MovieResponse> {
         if(resultsNowPlaying.isEmpty()){
             isLoading.value = true
-            viewModelScope.launch(Dispatchers.Main) {
+            viewModelScope.launch(Dispatchers.IO) {
                 try{
                     _resultsNowPlaying
                         .addAll(movieRepo
@@ -105,7 +105,7 @@ class ViewModelMain @Inject constructor(
     fun getDiscover() : MutableList<MovieResponse> {
         if(resultsDiscover.isEmpty()){
             isLoading.value = true
-            viewModelScope.launch(Dispatchers.Main) {
+            viewModelScope.launch(Dispatchers.IO) {
                 try{
                     _resultsDiscover
                         .addAll(0, movieRepo

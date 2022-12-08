@@ -25,7 +25,7 @@ class ViewModelAll @Inject constructor(
 
     private fun getPopular()  {
         _isLoading.value = true
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.IO) {
             try{
                 _resultsPopular
                     .addAll(movieRepo

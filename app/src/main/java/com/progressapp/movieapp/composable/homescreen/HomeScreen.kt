@@ -62,17 +62,17 @@ fun HomeScreen(
                     textAlign = TextAlign.Center)
 
                 LazyRow(modifier = Modifier.fillMaxWidth()){
-                    items(10){
+                    items(popularItem){
                         if (isLoading.value){
                             ProgressIndicator()
                         }
                         else{
                             AsyncImage(
-                                model = imageUrl + popularItem[it].movieImage,
+                                model = imageUrl + it.movieImage,
                                 contentDescription = "Movie item",
                                 modifier = Modifier
                                     .size(width = 150.dp, height = 250.dp)
-                                    .clickable { imageClicked(popularItem[it].MovieId.toInt()) }
+                                    .clickable { imageClicked(it.MovieId.toInt()) }
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                         }
