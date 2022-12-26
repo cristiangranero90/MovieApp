@@ -40,7 +40,7 @@ fun HomeScreen(
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { TopBar(onListClicked = { /*TODO*/ }, onAccountClicked = { /*TODO*/ }) },
+        topBar = { TopBar() },
         bottomBar = { bottomBar() },
 
     ) { paddingValues ->

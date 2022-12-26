@@ -29,19 +29,21 @@ class ViewModelMain @Inject constructor(
     val isLoading = mutableStateOf(false)
 
     private fun getPopular()  {
-        isLoading.value = true
-        viewModelScope.launch(Dispatchers.IO) {
-            try{
-                _resultsPopular
-                    .addAll(movieRepo
-                    .getPopularMovies(
-                        "1")
-                    .movieList)
+        if (resultsPopular.isEmpty()){
+            isLoading.value = true
+            viewModelScope.launch(Dispatchers.IO) {
+                try{
+                    _resultsPopular
+                        .addAll(movieRepo
+                            .getPopularMovies(
+                                "1")
+                            .movieList)
+                }
+                catch (e: Exception ) {
+                    println(e.toString())
+                }
+                isLoading.value = false
             }
-            catch (e: Exception ) {
-                println(e.toString())
-            }
-            isLoading.value = false
         }
     }
 
