@@ -1,6 +1,8 @@
 package com.progressapp.movieapp.repositories
 
+import com.progressapp.movieapp.dao.MovieDao
 import com.progressapp.movieapp.data.RestDataSource
+import com.progressapp.movieapp.model.Movie
 import com.progressapp.movieapp.model.MovieList
 import com.progressapp.movieapp.model.MovieResponse
 import com.progressapp.movieapp.model.MovieDetailed
@@ -9,8 +11,10 @@ import java.util.*
 import javax.inject.Inject
 
 class MovieRepositoryImp @Inject constructor(
-    private val dataSource: RestDataSource
+    private val dataSource: RestDataSource,
+    private val movieDao : MovieDao
 ) : MovieRepository {
+
     private val lang: String = Locale.getDefault().language + "-" + Locale.getDefault().country
 
     override suspend fun getLatestMovie(): MovieResponse? {
@@ -96,6 +100,48 @@ class MovieRepositoryImp @Inject constructor(
             throw RuntimeException("Movie list empty, an error has occurred")
         }
     }
+
+    override suspend fun searchMovie(toSearch: String): MovieList {
+
+        val response: Response<MovieList> = dataSource.searchMovie(lang, toSearch)
+
+        if (response.isSuccessful){
+            return response.body()!!
+        }
+        else{
+            throw RuntimeException("We cant find the movie. No match...")
+        }
+    }
+
+    //Database methods
+    override suspend fun addToFavourites(movie: MovieDetailed) : Boolean {
+        val aux = movieDao.getAllMovies()
+        var contains = false
+        for (it: Movie in aux){
+            contains = contains || it.title == movie.title
+        }
+        if (!contains) {
+            movieDao
+                .addMovie(Movie(
+                    title = movie.title,
+                    poster_path = movie.poster_path,
+                    idtmdb = movie.id))
+        }
+        return !contains
+    }
+
+    override suspend fun deleteMovie(toDelete: Movie) {
+        movieDao.deleteMovie(toDelete)
+    }
+
+    override suspend fun updateMovie(toUpdate: Movie) {
+        movieDao.updateMovie(toUpdate)
+    }
+
+    override suspend fun getAllMovies(): MutableList<Movie> {
+        return movieDao.getAllMovies()
+    }
+
 
 
 }

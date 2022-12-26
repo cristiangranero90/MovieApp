@@ -18,17 +18,18 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.progressapp.movieapp.composable.ProgressIndicator
-import com.progressapp.movieapp.composable.moviesviewscreen.components.TopBar
+import com.progressapp.movieapp.composable.homescreen.components.TopBar
 import com.progressapp.movieapp.ui.ViewModelMain
 
 @Composable
 fun HomeScreen(
-    vm: ViewModelMain,
     bottomBar: @Composable () -> Unit,
     imageClicked: (Int) -> Unit,
+    vm: ViewModelMain = hiltViewModel(),
     imageUrl: String = "https://image.tmdb.org/t/p/w500",
     modifier: Modifier = Modifier
 ){
+
     val popularItem = remember { vm.getMovieResults() }
     val upComingItem = remember { vm.getUpcoming() }
     val topRatedItem = remember { vm.getTopRated() }
@@ -61,17 +62,17 @@ fun HomeScreen(
                     textAlign = TextAlign.Center)
 
                 LazyRow(modifier = Modifier.fillMaxWidth()){
-                    items(10){
+                    items(popularItem){
                         if (isLoading.value){
                             ProgressIndicator()
                         }
                         else{
                             AsyncImage(
-                                model = imageUrl + popularItem[it].movieImage,
+                                model = imageUrl + it.movieImage,
                                 contentDescription = "Movie item",
                                 modifier = Modifier
                                     .size(width = 150.dp, height = 250.dp)
-                                    .clickable { imageClicked(popularItem[it].MovieId.toInt()) }
+                                    .clickable { imageClicked(it.MovieId.toInt()) }
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                         }
@@ -177,5 +178,5 @@ fun HomeScreen(
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview(){
-    HomeScreen(hiltViewModel(), {}, {})
+    //HomeScreen(hiltViewModel(), {}, {})
 }

@@ -49,9 +49,8 @@ fun BottomBar(
         BottomNavigationItem(
             icon = { Icon(imageVector = Icons.Default.Star, contentDescription = "Favorites") },
             label = { Text(text = "Favourites")},
-            selected = (selectedItem.value == 2),
+            selected = currentDestination?.hierarchy?.any { it.route == "favourites_screen" } == true,
             onClick = {
-                selectedItem.value = 2
                 onFavoritesClicked()
             }
         )
@@ -59,9 +58,8 @@ fun BottomBar(
         BottomNavigationItem(
             icon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Search movie") },
             label = { Text(text = "Search")},
-            selected = (selectedItem.value == 3),
+            selected = currentDestination?.hierarchy?.any { it.route == "search_screen" } == true,
             onClick = {
-                selectedItem.value = 3
                 onSearchClicked()
             }
         )
