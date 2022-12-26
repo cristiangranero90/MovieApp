@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.progressapp.movieapp.ViewModelSearch
+import com.progressapp.movieapp.ui.ViewModelSearch
 import com.progressapp.movieapp.composable.ProgressIndicator
 import com.progressapp.movieapp.composable.moviesviewscreen.components.MovieItemView
 import com.progressapp.movieapp.composable.searchscreen.components.TopSearchBar

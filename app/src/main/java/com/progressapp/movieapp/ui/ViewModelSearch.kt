@@ -1,4 +1,4 @@
-package com.progressapp.movieapp
+package com.progressapp.movieapp.ui
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -17,10 +17,10 @@ class ViewModelSearch @Inject constructor(
     private val movieRepo: MovieRepositoryImp
 ) : ViewModel() {
 
-    var searchText = mutableStateOf("")
-    var startSearch = mutableStateOf(searchText.value.length > 3)
     private val _isLoading = mutableStateOf(false)
     private val _resultsSearch = mutableStateListOf<MovieResponse>()
+    var searchText = mutableStateOf("")
+    var startSearch = mutableStateOf(searchText.value.length > 3)
     var resultsSearch = _resultsSearch
 
     fun isLoading() = _isLoading.value

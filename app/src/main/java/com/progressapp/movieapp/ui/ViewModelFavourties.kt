@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.progressapp.movieapp.model.Movie
 import com.progressapp.movieapp.repositories.MovieRepositoryImp
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,6 +20,14 @@ class ViewModelFavourites @Inject constructor(
     private val _isLoading = mutableStateOf(false)
     private val _allFavourites = mutableStateListOf<Movie>()
     val allFavourites = _allFavourites
+
+    init {
+        _isLoading.value = true
+        viewModelScope.launch {
+            _allFavourites.addAll(0, movieRepo.getAllMovies())
+            _isLoading.value = false
+        }
+    }
 
     fun isLoading() = _isLoading.value
 

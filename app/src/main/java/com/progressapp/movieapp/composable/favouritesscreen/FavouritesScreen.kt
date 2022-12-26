@@ -35,7 +35,6 @@ fun FavouritesScreen(
     }
     if(favourites.isEmpty()){
         MovieEmpty()
-        vm.getAll()
     }
 
     Scaffold(
