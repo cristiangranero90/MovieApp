@@ -26,11 +26,6 @@ object DataSourceModule {
 
     @Provides
     @Singleton
-    @Named("API_KEY")
-    fun provideApiKey() = "api_key=cb86974c362f47d464bb3b6c94b8f7c2&language=en-US&page=1"
-
-    @Provides
-    @Singleton
     fun provideRetrofit(@Named("BASE_URL") baseUrl : String) : Retrofit =
         Retrofit.Builder()
             .baseUrl(baseUrl)
