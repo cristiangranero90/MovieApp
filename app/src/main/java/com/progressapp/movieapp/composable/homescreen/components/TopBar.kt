@@ -19,8 +19,6 @@ import com.progressapp.movieapp.R
 
 @Composable
 fun TopBar(
-    onListClicked: () -> Unit,
-    onAccountClicked: () -> Unit,
     modifier: Modifier = Modifier
 ){
     TopAppBar(
@@ -38,18 +36,6 @@ fun TopBar(
                 contentScale = ContentScale.Crop
             )
         },
-
-        navigationIcon = {
-            IconButton(onClick = onListClicked) {
-                Icon(imageVector = Icons.Default.List, contentDescription = "Side menu")
-            }
-        },
-
-        actions = {
-            IconButton(onClick = onAccountClicked) {
-                Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "Account settings")
-            }
-        }
     )
 }
 
@@ -57,5 +43,5 @@ fun TopBar(
 @Preview(showBackground = true)
 @Composable
 fun TopBarPreview(){
-    TopBar({},{})
+    TopBar()
 }

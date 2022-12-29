@@ -33,6 +33,7 @@ fun TopSearchBar(
 
     TopAppBar(
         modifier = Modifier,
+        backgroundColor = MaterialTheme.colors.primary,
         elevation = 2.dp,
         navigationIcon = {
             IconButton(onClick = { onBackClicked() }) {
