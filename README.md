@@ -13,5 +13,6 @@
 10. MVVM project
 
 ![Splash Screen (Dark mode)](https://github.com/cristiangranero90/MovieApp/blob/main/MovieAppReadmeImages/1672279819429.jpg =200x400)
+<img src="https://github.com/cristiangranero90/MovieApp/blob/main/MovieAppReadmeImages/1672279819429.jpg" alt="drawing" width="200"/>
 
 Logos: blue_long_big.xml and blue_long.xml, are property of the TMDB
