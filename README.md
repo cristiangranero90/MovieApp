@@ -1,7 +1,6 @@
 ## Movie App
 ### A simple movie visualizer
 
-
 1. Hilt, dependency injection
 2. Coroutines
 3. Retrofit 2
@@ -12,5 +11,7 @@
 8. Gson serialization
 9. Light & Dark mode available
 10. MVVM project
+
+![Splash Screen (Dark mode)](https://github.com/cristiangranero90/MovieApp/blob/main/MovieAppReadmeImages/1672279819429.jpg)
 
 Logos: blue_long_big.xml and blue_long.xml, are property of the TMDB
