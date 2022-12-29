@@ -1,9 +1,16 @@
 ## Movie App
+### A simple movie visualizer
 
-1. Retrofit
+
+1. Hilt, dependency injection
 2. Coroutines
-3. Hilt
-4. ViewModel
-5. Jetpack Compose
+3. Retrofit 2
+4. Room Database
+5. ViewModel
+6. Jetpack Compose
+7. Material Design
+8. Gson serialization
+9. Light & Dark mode available
+10. MVVM project
 
 Logos: blue_long_big.xml and blue_long.xml, are property of the TMDB
