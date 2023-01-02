@@ -10,8 +10,11 @@
 6. Jetpack Compose
 7. Material Design
 8. Gson serialization
-9. Light & Dark mode available
-10. MVVM project
+9. Coil async images loader
+10. Navigation Compose
+11. Secrets Gradle plugin
+12. Light & Dark mode available
+13. MVVM project
 
 ***To Execute:*** Add into ***local.properties*** of your project, an apikey. You can find one on [TMDB Api](https://www.themoviedb.org/)
 
